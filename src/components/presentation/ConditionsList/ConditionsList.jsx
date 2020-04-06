@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,22 +13,9 @@ import {
   TableRow,
 } from '@material-ui/core';
 import TableHeader from 'components/core/TableHeader';
+import { deleteConditionRequest, upadteConditionRequest } from 'store/ducks/conditionsReducer';
 
 
-const conditions = [
-  {
-    id: 1,
-    name: 'Tosse seca',
-  },
-  {
-    id: 2,
-    name: 'Febre',
-  },
-  {
-    id: 3,
-    name: 'Asma',
-  },
-];
 const headCells = [
   {
     id: 'name',
@@ -39,7 +27,7 @@ const headCells = [
   },
 ];
 
-const ConditionsList = () => {
+const ConditionsList = (conditions) => {
   const classes = makeStyles({
     root: {
       width: '100%',
@@ -74,9 +62,15 @@ const ConditionsList = () => {
       cursor: 'pointer',
     },
   })();
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [name, setName] = useState(conditions.name);
+  const [isDid, setIsDid] = useState(false);
   const isSelected = (id) => selected.indexOf(id) !== -1;
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, conditions.length - page * rowsPerPage);
 
@@ -108,27 +102,53 @@ const ConditionsList = () => {
     setPage(0);
   };
 
-  return (
+  useEffect(() => {
+    setIsDeleted(false);
+    setIsUpdated(false);
+  }, [conditions.id, conditions.isChange]);
 
+  const deleteOnClick = useCallback(() => {
+    setIsDeleted(true);
+    dispatch(deleteConditionRequest(conditions.id));
+  }, [conditions]);
+
+  const nameOnChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const updateOkOnclick = useCallback(() => {
+    dispatch(upadteConditionRequest({ conditionsId: conditions.id, name }));
+    setIsUpdate(false);
+    setIsUpdated(true);
+  }, [name]);
+
+  const cancelOnClick = useCallback(() => {
+    setIsUpdate(false);
+  }, []);
+
+  const doOnClick = useCallback(() => {
+    setIsDid(!isDid);
+  }, [isDid]);
+
+  return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <TableContainer>
           <Table
             className={classes.table}
             size="medium"
-            aria-label="Perfis Cadastrados"
+            aria-label="Condições Pré-Existentes Cadastradas"
           >
             <TableHeader headCells={headCells} />
             <TableBody>
               {conditions
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((condition) => {
                   const isItemSelected = isSelected(condition.id);
                   return (
                     <TableRow
                       classes={styleRow}
                       hover
-                      onClick={(event) => handleClick(event, condition.id)}
+                      onClick={(event) => handleClick(event, conditions.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -136,7 +156,7 @@ const ConditionsList = () => {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox" />
-                      <TableCell align="left">{condition.name}</TableCell>
+                      <TableCell align="left">{conditions.name}</TableCell>
                       <TableCell align="left">
                         <Button
                           variant="contained"

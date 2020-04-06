@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import auth from './authReducer';
-import conditions from './conditionsReducer';
+import conditionsReducer from './conditionsReducer';
 
 const appReducer = (history) => combineReducers({
   router: connectRouter(history),
   auth,
-  conditions,
+  conditionsReducer,
 });
 
 const Reducers = (history) => appReducer(history);

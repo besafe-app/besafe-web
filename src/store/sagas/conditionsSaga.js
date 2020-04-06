@@ -1,31 +1,50 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
-import { takeEvery, put, call } from 'redux-saga/effects';
-import { Types } from 'store/ducks/conditionsReducer';
-
-const BASE_URL = 'https://besafe-backend.herokuapp.com/';
-
+import {
+  delay, takeLatest, put,
+} from 'redux-saga/effects';
+import * as Types from 'store/ducks/conditionsReducer';
+import {
+  addConditionSuccess,
+  addConditionFailure,
+  updateConditionSuccess,
+  updateConditionFailure,
+  deleteConditionRequest,
+  deleteConditionSuccess,
+  deleteConditionFailure,
+} from 'store/ducks/conditionsReducer';
 
 function* addCondition(action) {
-  const newCondition = { name: '', content: action.payload };
   try {
-    yield call(axios.post, `${BASE_URL}/posts`, newCondition);
-    yield put({ type: 'CONDITION_ADD' });
-  } catch (error) {
-    console.log('addCondition error:', error.message);
+    yield delay(1000);
+    yield put(addConditionSuccess({ data: action.data }));
+  } catch (e) {
+    yield put(addConditionFailure({ e }));
+    console.error(e);
   }
 }
 
-function* removeCondition({ id }) {
+function* updateCondition(action) {
   try {
-    yield call(axios.delete, `${BASE_URL}/posts/${id}`);
-    yield put({ type: 'CONDITION_REMOVE' });
-  } catch (error) {
-    console.log('removeCondition error:', error.message);
+    yield delay(1000);
+    yield put(updateConditionSuccess({ data: action.data }));
+  } catch (e) {
+    yield put(updateConditionFailure({ e }));
+    console.error(e);
+  }
+}
+
+function* deleteCondition(action) {
+  try {
+    yield delay(1000);
+    yield put(deleteConditionSuccess({ data: action.data }));
+  } catch (e) {
+    yield put(deleteConditionFailure({ e }));
+    console.error(e);
   }
 }
 
 export function* watcherSaga() {
-  yield takeEvery(Types.ASYNC_CONDITION_ADD, addCondition);
-  yield takeEvery(Types.ASYNC_CONDITION_REMOVE, removeCondition);
+  yield takeLatest(Types.CONDITION_ADD_REQUEST, addCondition);
+  yield takeLatest(Types.CONDITION_UPDATE_REQUEST, updateCondition);
+  yield takeLatest(Types.CONDITION_DELETE_REQUEST, deleteCondition);
 }

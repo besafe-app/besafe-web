@@ -4,8 +4,8 @@ import * as ConditionSaga from './conditionsSaga';
 
 function* Sagas() {
   yield all([
-    ConditionSaga.watcherSaga(),
     AuthSaga.watcherSaga(),
+    ConditionSaga.watcherSaga(),
   ]);
 }
 
