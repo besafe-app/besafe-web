@@ -12,10 +12,10 @@ const ConditionsForm = () => {
     root: {
       '& .MuiButton-root': {
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'flex-end',
-        marginTop: 100,
-        marginLeft: 50,
+        marginTop: -29,
+        marginLeft: 500,
+        cursor: 'pointer',
       },
       '& .MuiButton-containedSecondary': {
         backgroundColor: '#DA1F26',
@@ -31,7 +31,7 @@ const ConditionsForm = () => {
   const onSubmit = useCallback((e) => {
     e.preventDefault();
     if (!newCondition || !newCondition.trim()) {
-      return alert('Editar Condição Pré-Existente.');
+      return alert('Adicionar uma Condição Pré-Existente.');
     }
     dispatch(addConditionRequest(newCondition));
     setNewCondition('');
@@ -39,7 +39,7 @@ const ConditionsForm = () => {
   [newCondition]);
   return (
     <>
-      <ContainerForm role="form">
+      <ContainerForm>
         <form onSubmit={onSubmit}>
           <input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
           <div className={useStyles.root}>

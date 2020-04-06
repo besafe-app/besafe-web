@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 
 export const ContainerForm = styled.div`
-  display: flex;    
-  justify-content: center; 
-  margin-left: 150px;
-  input{
+  display: flex;   
+  max-width: 60%;   
+  justify-content: flex-end;   
+  margin-left: 250px;
+    input{
     width:450px;
     height:auto;
     border-radius:5px;
