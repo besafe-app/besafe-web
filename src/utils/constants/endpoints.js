@@ -7,4 +7,4 @@ const prefix = 'admin';
 export const basePath = `${base}/${service}/${version}`;
 
 /* Conditions endpoints */
-export const CONDITIONS = 'conditions';
+export const CONDITIONS = 'api/v1/conditions';

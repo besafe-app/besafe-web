@@ -41,7 +41,7 @@ const ConditionsForm = () => {
     <>
       <ContainerForm>
         <form onSubmit={onSubmit}>
-          <input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
+          <input id="name" placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
           <div className={useStyles.root}>
             <Button
               variant="contained"

@@ -18,7 +18,7 @@ const urls = {
     ADMINS: '/admins',
   },
 };
-export const BASE_URL_BESAFE = 'https://besafe-backend.herokuapp.com/api/v1/';
+export const BASE_URL_BESAFE = 'https://besafe-backend.herokuapp.com/';
 
 
 export default urls;
