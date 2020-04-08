@@ -5,7 +5,7 @@ const BeSafeApi = axios.create({
   baseURL: BASE_URL_BESAFE,
   origem: '',
   headers: {
-    'Content-Type': '',
+    'Content-Type': 'application/json',
   },
 });
 

@@ -1,9 +1,19 @@
 /* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
-export const INITIAL_STATE = {
-  isAddingCondition: false,
-  isAdded: false,
-  maxNum: 3,
+import { createActions, createReducer } from 'reduxsauce';
+
+export const { Types, Creators } = createActions({
+  addConditionRequest: ['name', 'data'],
+  addConditionSuccess: ['data'],
+  addConditionFailure: ['e', 'error'],
+  deleteConditionRequest: ['condition', 'data'],
+  deleteConditionSuccess: ['data'],
+  deleteConditionFailure: ['e', 'error'],
+  updateConditionRequest: ['condition', 'name', 'data'],
+  updateConditionSuccess: ['data'],
+  updateConditionFailure: ['e', 'error'],
+});
+
+const INITIAL_STATE = {
   conditions: [
     {
       id: 1,
@@ -21,126 +31,69 @@ export const INITIAL_STATE = {
       isChange: 0,
     },
   ],
+  isAddingCondition: false,
+  isAdded: false,
 };
 
-export const CONDITION_ADD_REQUEST = 'CONDITION_ADD_REQUEST';
-export const CONDITION_ADD_SUCCESS = 'CONDITION_ADD_SUCCESS';
-export const CONDITION_ADD_FAILURE = 'CONDITION_ADD_FAILURE';
-export const CONDITION_DELETE_REQUEST = 'CONDITION_DELETE_REQUEST';
-export const CONDITION_DELETE_SUCCESS = 'CONDITION_DELETE_SUCCESS';
-export const CONDITION_DELETE_FAILURE = 'CONDITION_DELETE_FAILURE';
-export const CONDITION_UPDATE_REQUEST = 'CONDITION_UPDATE_REQUEST';
-export const CONDITION_UPDATE_SUCCESS = 'CONDITION_UPDATE_SUCCESS';
-export const CONDITION_UPDATE_FAILURE = 'CONDITION_UPDATE_FAILURE';
 
-export const addConditionRequest = (newCondition) => ({
-  type: CONDITION_ADD_REQUEST,
-  data: newCondition.trim(),
+const addConditionRequest = (state = INITIAL_STATE, action) => ({
+  ...state,
+  name: action.name,
+  isAddingCondition: true,
+  isAdded: false,
 });
 
-export const addConditionSuccess = ({ data }) => ({
-  type: CONDITION_ADD_SUCCESS,
-  data,
+const addConditionSuccess = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isAddingCondition: false,
+  isAdded: true,
+  conditions: [...state.condition, {
+    id: Math.random(), name: action.data, isChange: false,
+  }],
 });
 
-export const addConditionFailure = ({ e }) => ({
-  type: CONDITION_ADD_FAILURE,
-  error: e,
+const addConditionFailure = (state = INITIAL_STATE, error) => ({
+  state,
+  error,
 });
 
-export const deleteConditionRequest = (conditionsId) => ({
-  type: CONDITION_DELETE_REQUEST,
-  data: conditionsId,
+const deleteConditionRequest = (state = INITIAL_STATE) => ({
+  ...state,
 });
 
-export const deleteConditionSuccess = ({ data }) => ({
-  type: CONDITION_DELETE_SUCCESS,
-  data,
+const deleteConditionSuccess = (state = INITIAL_STATE, action) => state.filter((condition) => condition.id !== action.data);
+
+const deleteConditionFailure = (state = INITIAL_STATE, error) => ({
+  state,
+  error,
 });
 
-export const deleteConditionFailure = ({ e }) => ({
-  type: CONDITION_DELETE_FAILURE,
-  error: e,
+const updateConditionRequest = (state = INITIAL_STATE) => ({
+  ...state,
 });
 
-export const upadteConditionRequest = ({ conditionsId, name }) => ({
-  type: CONDITION_UPDATE_REQUEST,
-  data: {
-    id: conditionsId,
-    name,
-  },
+const updateConditionSuccess = (state = INITIAL_STATE, action, conditions) => [...state, conditions,
+  state.map((condition) => {
+    if (condition.id === action.data.id) {
+      condition.name = action.data.name;
+      condition.isChange = condition.isChange === 0 ? 1 : 0;
+    }
+    return condition;
+  })];
+
+const updateConditionFailure = (state = INITIAL_STATE, error) => ({
+  state,
+  error,
 });
 
-export const updateConditionSuccess = ({ data }) => ({
-  type: CONDITION_UPDATE_SUCCESS,
-  data,
+export default createReducer(INITIAL_STATE, {
+  [Types.ADD_CONDITION_REQUEST]: addConditionRequest,
+  [Types.ADD_CONDITION_SUCCESS]: addConditionSuccess,
+  [Types.ADD_CONDITION_FAILURE]: addConditionFailure,
+  [Types.DELETE_CONDITION_REQUEST]: deleteConditionRequest,
+  [Types.DELETE_CONDITION_SUCCESS]: deleteConditionSuccess,
+  [Types.DELETE_CONDITION_FAILURE]: deleteConditionFailure,
+  [Types.UPDATE_CONDITION_REQUEST]: updateConditionRequest,
+  [Types.UPDATE_CONDITION_SUCCESS]: updateConditionSuccess,
+  [Types.UPDATE_CONDITION_FAILURE]: updateConditionFailure,
 });
-
-export const updateConditionFailure = ({ e }) => ({
-  type: CONDITION_UPDATE_FAILURE,
-  error: e,
-});
-
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case CONDITION_ADD_REQUEST: {
-      return {
-        ...state,
-        isAddingCondition: true,
-        isAdded: false,
-      };
-    }
-    case CONDITION_ADD_SUCCESS: {
-      return {
-        ...state,
-        isAddingCondition: false,
-        isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, isChange: false }],
-        maxNum: state.maxNum + 1,
-      };
-    }
-    case CONDITION_ADD_FAILURE: {
-      return state;
-    }
-    case CONDITION_DELETE_REQUEST: {
-      return {
-        ...state,
-      };
-    }
-    case CONDITION_DELETE_SUCCESS: {
-      const conditions = state.conditions.filter((condition) => condition.id !== action.data);
-      return {
-        ...state,
-        conditions,
-      };
-    }
-    case CONDITION_DELETE_FAILURE: {
-      return state;
-    }
-    case CONDITION_UPDATE_REQUEST: {
-      return {
-        ...state,
-      };
-    }
-    case CONDITION_UPDATE_SUCCESS: {
-      const conditions = state.conditions.map((condition) => {
-        if (condition.id === action.data.id) {
-          condition.name = action.data.name;
-          condition.isChange = condition.isChange === 0 ? 1 : 0;
-        }
-        return condition;
-      });
-      return {
-        ...state,
-        conditions,
-      };
-    }
-    case CONDITION_UPDATE_FAILURE: {
-      return state;
-    }
-    default:
-      return state;
-  }
-};
-
-export default reducer;

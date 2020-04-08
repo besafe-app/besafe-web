@@ -2,49 +2,64 @@
 import {
   delay, takeLatest, put,
 } from 'redux-saga/effects';
-import * as Types from 'store/ducks/conditionsReducer';
-import {
-  addConditionSuccess,
-  addConditionFailure,
-  updateConditionSuccess,
-  updateConditionFailure,
-  deleteConditionRequest,
-  deleteConditionSuccess,
-  deleteConditionFailure,
-} from 'store/ducks/conditionsReducer';
+import { Types } from 'store/ducks/conditionsReducer';
+import { POST } from 'utils/constants/verbs';
+import { requestAPI } from 'helpers/requestHelpers';
+import { CONDITIONS } from 'utils/constants/endpoints';
 
-function* addCondition(action) {
+
+function* conditionAdd(action) {
   try {
     yield delay(1000);
-    yield put(addConditionSuccess({ data: action.data }));
-  } catch (e) {
-    yield put(addConditionFailure({ e }));
-    console.error(e);
+    yield requestAPI({
+      verb: POST,
+      endPoint: CONDITIONS,
+      data: action,
+    });
+    yield put({
+      type: Types.ADD_CONDITION_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: Types.ADD_CONDITION_FAILURE,
+      error: [error],
+    });
   }
 }
 
-function* updateCondition(action) {
+function* conditionUpdate(action) {
   try {
     yield delay(1000);
-    yield put(updateConditionSuccess({ data: action.data }));
-  } catch (e) {
-    yield put(updateConditionFailure({ e }));
-    console.error(e);
+    yield put({
+      type: Types.UPDATE_CONDITION_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: Types.UPDATE_CONDITION_FAILURE,
+      errors: [error],
+    });
   }
 }
 
-function* deleteCondition(action) {
+function* conditionDelete(action) {
   try {
     yield delay(1000);
-    yield put(deleteConditionSuccess({ data: action.data }));
-  } catch (e) {
-    yield put(deleteConditionFailure({ e }));
-    console.error(e);
+    yield put({
+      type: Types.DELETE_CONDITION_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: Types.DELETE_CONDITION_FAILURE,
+      errors: [error],
+    });
   }
 }
 
 export function* watcherSaga() {
-  yield takeLatest(Types.CONDITION_ADD_REQUEST, addCondition);
-  yield takeLatest(Types.CONDITION_UPDATE_REQUEST, updateCondition);
-  yield takeLatest(Types.CONDITION_DELETE_REQUEST, deleteCondition);
+  yield takeLatest(Types.ADD_CONDITION_REQUEST, conditionAdd);
+  yield takeLatest(Types.UPDATE_CONDITION_REQUEST, conditionUpdate);
+  yield takeLatest(Types.DELETE_CONDITION_REQUEST, conditionDelete);
 }
