@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators as AuthActions } from 'store/ducks/authReducer';
-import {
-  Divider, Drawer, List, ListItem,
-} from '@material-ui/core';
+import { Divider, Drawer, List, ListItem } from '@material-ui/core';
 import ListTitle from 'components/core/ListTitle';
 import LogoutLink from 'components/presentation/LogoutLink';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,11 +9,14 @@ import urls from 'utils/constants/urls';
 import LinkCustom from 'components/core/LinkCustom';
 import ImgIcon from 'assets/img/logo.png';
 import {
-  TitleContainer, LogoIcon, UserNameContainer, Container,
+  TitleContainer,
+  LogoIcon,
+  UserNameContainer,
+  Container,
 } from './MenuStyle';
 
 const Menu = () => {
-  const [userName, setUsername] = useState('José Eustáquio');
+  const [userName, setUsername] = useState({ userName: '' });
   const dispatch = useDispatch();
   const materialStyles = makeStyles({
     root: {
@@ -80,9 +81,7 @@ const Menu = () => {
         <LogoIcon src={ImgIcon} />
         <Container>
           <UserNameContainer>
-            <span>
-              {userName}
-            </span>
+            <span>{userName.userName}</span>
           </UserNameContainer>
           <LogoutLink logoutUser={logoutUser} />
         </Container>
@@ -95,11 +94,7 @@ const Menu = () => {
               </TitleContainer>
             )}
             {items.map(({ label, link }) => (
-              <ListItem
-                key={label}
-                value={label}
-                variant="menu"
-              >
+              <ListItem key={label} value={label} variant="menu">
                 <LinkCustom route={link}>{label}</LinkCustom>
               </ListItem>
             ))}
