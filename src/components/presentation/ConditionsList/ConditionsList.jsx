@@ -13,8 +13,6 @@ const ConditionsList = ({ conditions }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [name, setName] = useState(conditions.name);
-  const [isDid, setIsDid] = useState(false);
-
 
   useEffect(() => {
     setIsDeleted(false);
@@ -22,12 +20,8 @@ const ConditionsList = ({ conditions }) => {
   }, [conditions.id, conditions.isChange]);
 
   const updateOnclick = useCallback(() => {
-    if (isDid) {
-      setIsDid(true);
-      return;
-    }
-    setIsUpdate(true);
-  }, [isDid]);
+    setIsUpdate(!isUpdate);
+  }, [isUpdate]);
 
   const deleteOnClick = useCallback(() => {
     setIsDeleted(true);
