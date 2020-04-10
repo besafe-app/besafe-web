@@ -23,7 +23,7 @@ const ConditionsList = ({ conditions }) => {
 
   const updateOnclick = useCallback(() => {
     if (isDid) {
-      alert('Lista atualizada');
+      setIsDid(true);
       return;
     }
     setIsUpdate(true);
@@ -48,19 +48,15 @@ const ConditionsList = ({ conditions }) => {
     setIsUpdate(false);
   }, []);
 
-  const doOnClick = useCallback(() => {
-    setIsDid(!isDid);
-  }, [isDid]);
-
   return (
     <List.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {!isUpdate ? <><Typography.Text onClick={doOnClick}>{conditions.name}</Typography.Text></>
+      {!isUpdate ? <><Typography.Text>{conditions.name}</Typography.Text></>
         : <Input value={name} onChange={nameOnChange} />}
       <div style={{ display: 'flex' }}>
         {!isUpdate ? (
           <>
             <Button
-              style={{ background: 'yellowgreen', color: 'white' }}
+              style={{ background: 'green', color: 'white' }}
               onClick={updateOnclick}
               loading={isUpdated}
             >
