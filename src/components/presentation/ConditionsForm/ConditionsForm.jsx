@@ -1,64 +1,41 @@
+/* eslint-disable consistent-return */
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-// import { addCondition } from 'store/ducks/conditionsReducer';
+import { Form, Input, Button } from 'antd';
 import { Creators as ConditionActions } from 'store/ducks/conditionsReducer';
-import { ContainerForm } from './CondFormStyle';
-
 
 const ConditionsForm = () => {
-  const useStyles = makeStyles({
-    root: {
-      '& .MuiButton-root': {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: -29,
-        marginLeft: 500,
-        cursor: 'pointer',
-      },
-      '& .MuiButton-containedSecondary': {
-        backgroundColor: '#DA1F26',
-      },
-    },
-  })();
   const [newCondition, setNewCondition] = useState('');
   const dispatch = useDispatch();
   const { isAddingCondition } = useSelector((state) => state.conditionsReducer);
+  console.log(isAddingCondition);
   const onChangeInput = useCallback((e) => {
     setNewCondition(e.target.value);
   }, []);
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    if (!newCondition || !newCondition.trim()) {
-      return alert('Adicionar uma Condição Pré-Existente.');
-    }
-    dispatch(ConditionActions.addCondition(newCondition));
-    setNewCondition('');
-  },
-  [newCondition]);
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!newCondition || !newCondition.trim()) {
+        return alert('Editar Condição.');
+      }
+      dispatch(ConditionActions.addConditionRequest(newCondition));
+      setNewCondition('');
+    },
+    [newCondition, dispatch],
+  );
   return (
     <>
-      <ContainerForm>
-        <form onSubmit={onSubmit}>
-          <input id="name" placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
-          <div className={useStyles.root}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className={useStyles.button}
-              startIcon={<AddCircleOutlineIcon />}
-              size="small"
-              onClick={isAddingCondition}
-            >
-              Adicionar
-            </Button>
-          </div>
-        </form>
-      </ContainerForm>
-
+      <Form
+        style={{
+          display: 'flex', marginTop: '60px', marginLeft: '400px', width: '700px',
+        }}
+        onSubmit={onSubmit}
+      >
+        <Input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
+        <Button type="primary" htmlType="submit" loading={isAddingCondition}>
+          Adicionar
+        </Button>
+      </Form>
     </>
   );
 };

@@ -2,18 +2,23 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Types, Creators } = createActions({
-  addConditionRequest: ['name', 'data'],
+  addConditionRequest: ['name', 'newCondition'],
   addConditionSuccess: ['data'],
-  addConditionFailure: ['e', 'error'],
-  deleteConditionRequest: ['condition', 'data'],
+  addConditionFailure: ['errors'],
+  deleteConditionRequest: ['conditionId'],
   deleteConditionSuccess: ['data'],
-  deleteConditionFailure: ['e', 'error'],
-  updateConditionRequest: ['condition', 'name', 'data'],
+  deleteConditionFailure: ['errors'],
+  updateConditionRequest: ['conditionId', 'name'],
   updateConditionSuccess: ['data'],
-  updateConditionFailure: ['e', 'error'],
+  updateConditionFailure: ['errors'],
 });
 
 const INITIAL_STATE = {
+  isAddingCondition: false,
+  isAdded: false,
+  maxNum: 3,
+  data: {},
+  errors: [],
   conditions: [
     {
       id: 1,
@@ -31,8 +36,6 @@ const INITIAL_STATE = {
       isChange: 0,
     },
   ],
-  isAddingCondition: false,
-  isAdded: false,
 };
 
 
@@ -47,43 +50,54 @@ const addConditionSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
   isAddingCondition: false,
   isAdded: true,
-  conditions: [...state.condition, {
-    id: Math.random(), name: action.data, isChange: false,
+  conditions: [...state.conditions, {
+    id: state.maxNum + 1, name: action.data, isChange: false,
   }],
 });
 
-const addConditionFailure = (state = INITIAL_STATE, error) => ({
+const addConditionFailure = (state = INITIAL_STATE, errors) => ({
   state,
-  error,
+  errors,
 });
 
 const deleteConditionRequest = (state = INITIAL_STATE) => ({
   ...state,
 });
 
-const deleteConditionSuccess = (state = INITIAL_STATE, action) => state.filter((condition) => condition.id !== action.data);
+const deleteConditionSuccess = (state = INITIAL_STATE, action) => {
+  const conditions = state.conditions.filter((c) => c.id !== action.data);
+  return {
+    ...state,
+    conditions,
+  };
+};
 
-const deleteConditionFailure = (state = INITIAL_STATE, error) => ({
+const deleteConditionFailure = (state = INITIAL_STATE, errors) => ({
   state,
-  error,
+  errors,
 });
 
 const updateConditionRequest = (state = INITIAL_STATE) => ({
   ...state,
 });
 
-const updateConditionSuccess = (state = INITIAL_STATE, action, conditions) => [...state, conditions,
-  state.map((condition) => {
-    if (condition.id === action.data.id) {
-      condition.name = action.data.name;
-      condition.isChange = condition.isChange === 0 ? 1 : 0;
+const updateConditionSuccess = (state = INITIAL_STATE, action) => {
+  const conditions = state.conditions.map((c) => {
+    if (c.id === action.data.id) {
+      c.name = action.data.name;
+      c.isChange = c.isChange === 0 ? 1 : 0;
     }
-    return condition;
-  })];
+    return c;
+  });
+  return {
+    ...state,
+    conditions,
+  };
+};
 
-const updateConditionFailure = (state = INITIAL_STATE, error) => ({
+const updateConditionFailure = (state = INITIAL_STATE, errors) => ({
   state,
-  error,
+  errors,
 });
 
 export default createReducer(INITIAL_STATE, {

@@ -8,7 +8,7 @@ import { requestAPI } from 'helpers/requestHelpers';
 import { CONDITIONS } from 'utils/constants/endpoints';
 
 
-function* conditionAdd(action) {
+function* addCondition(action) {
   try {
     yield delay(1000);
     yield requestAPI({
@@ -20,46 +20,46 @@ function* conditionAdd(action) {
       type: Types.ADD_CONDITION_SUCCESS,
       data: action.data,
     });
-  } catch (error) {
+  } catch (errors) {
     yield put({
       type: Types.ADD_CONDITION_FAILURE,
-      error: [error],
+      error: [errors],
     });
   }
 }
 
-function* conditionUpdate(action) {
+function* updateCondition(action) {
   try {
     yield delay(1000);
     yield put({
       type: Types.UPDATE_CONDITION_SUCCESS,
       data: action.data,
     });
-  } catch (error) {
+  } catch (errors) {
     yield put({
       type: Types.UPDATE_CONDITION_FAILURE,
-      errors: [error],
+      errors: [errors],
     });
   }
 }
 
-function* conditionDelete(action) {
+function* deleteCondition(action) {
   try {
     yield delay(1000);
     yield put({
       type: Types.DELETE_CONDITION_SUCCESS,
       data: action.data,
     });
-  } catch (error) {
+  } catch (errors) {
     yield put({
       type: Types.DELETE_CONDITION_FAILURE,
-      errors: [error],
+      errors: [errors],
     });
   }
 }
 
 export function* watcherSaga() {
-  yield takeLatest(Types.ADD_CONDITION_REQUEST, conditionAdd);
-  yield takeLatest(Types.UPDATE_CONDITION_REQUEST, conditionUpdate);
-  yield takeLatest(Types.DELETE_CONDITION_REQUEST, conditionDelete);
+  yield takeLatest(Types.ADD_CONDITION_REQUEST, addCondition);
+  yield takeLatest(Types.UPDATE_CONDITION_REQUEST, updateCondition);
+  yield takeLatest(Types.DELETE_CONDITION_REQUEST, deleteCondition);
 }

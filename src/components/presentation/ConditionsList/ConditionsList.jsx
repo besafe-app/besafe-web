@@ -1,16 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   List, Typography, Button, Input,
 } from 'antd';
 import { useDispatch } from 'react-redux';
-// import Button from '@material-ui/core/Button';
-// import DeleteIcon from '@material-ui/icons/Delete' ;
-
-// import TableHeader from 'components/core/TableHeader';
 import { Creators as ConditionActions } from 'store/ducks/conditionsReducer';
 
 
-const ConditionsList = (conditions) => {
+const ConditionsList = ({ conditions }) => {
   const dispatch = useDispatch();
   const [isUpdate, setIsUpdate] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -26,7 +23,7 @@ const ConditionsList = (conditions) => {
 
   const updateOnclick = useCallback(() => {
     if (isDid) {
-      alert('Você não pode editar uma lista que já foi concluída.');
+      alert('Lista atualizada');
       return;
     }
     setIsUpdate(true);
@@ -34,18 +31,18 @@ const ConditionsList = (conditions) => {
 
   const deleteOnClick = useCallback(() => {
     setIsDeleted(true);
-    dispatch(ConditionActions.deleteConditiont(conditions.id));
-  }, [conditions]);
+    dispatch(ConditionActions.deleteConditionRequest(conditions.id));
+  }, [conditions, dispatch]);
 
   const nameOnChange = (e) => {
     setName(e.target.value);
   };
 
   const updateOkOnclick = useCallback(() => {
-    dispatch(ConditionActions.upadteCondition({ conditionsId: conditions.id, name }));
+    dispatch(ConditionActions.updateConditionRequest({ conditionId: conditions.id, name }));
     setIsUpdate(false);
     setIsUpdated(true);
-  }, [name]);
+  }, [name, conditions.id, dispatch]);
 
   const cancelOnClick = useCallback(() => {
     setIsUpdate(false);
@@ -57,7 +54,7 @@ const ConditionsList = (conditions) => {
 
   return (
     <List.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {!isUpdate ? <><Typography.Text style={{ textDecoration: isDid ? 'line-through' : null }} mark onClick={doOnClick}>{conditions.name}</Typography.Text></>
+      {!isUpdate ? <><Typography.Text onClick={doOnClick}>{conditions.name}</Typography.Text></>
         : <Input value={name} onChange={nameOnChange} />}
       <div style={{ display: 'flex' }}>
         {!isUpdate ? (
@@ -89,4 +86,9 @@ const ConditionsList = (conditions) => {
     </List.Item>
   );
 };
+
+ConditionsList.propTypes = {
+  conditions: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 export default ConditionsList;
