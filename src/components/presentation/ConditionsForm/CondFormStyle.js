@@ -8,7 +8,7 @@ export const ContainerForm = styled.div`
   justify-content: flex-end;   
   margin-left: 250px;
     input{
-    width:450px;
+    width:500px;
     height:auto;
     border-radius:5px;
     margin-top: 100px;

@@ -7,16 +7,16 @@ const ConditionsListContainer = () => {
   const { conditions } = useSelector((state) => state.conditionsReducer);
   return (
     <List
-      style={{ marginTop: '50px', marginLeft: '400px', width: '700px' }}
-      header={<div>Condições cadastradas</div>}
+      style={{ marginTop: '50px', width: '700px', marginLeft: '400px' }}
+      header={<div>Condições Cadastradas</div>}
       bordered
       dataSource={conditions}
-      // eslint-disable-next-line no-shadow
       renderItem={(conditions) => (
         <ConditionsList key={conditions.id} conditions={conditions} />
       )}
     />
   );
 };
+
 
 export default ConditionsListContainer;

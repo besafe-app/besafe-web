@@ -4,7 +4,7 @@ import {
   List, Typography, Button, Input,
 } from 'antd';
 import { useDispatch } from 'react-redux';
-import { Creators as ConditionActions } from 'store/ducks/conditionsReducer';
+import { deleteConditionRequest, upadteConditionRequest } from 'store/ducks/conditionsReducer';
 
 
 const ConditionsList = ({ conditions }) => {
@@ -25,7 +25,7 @@ const ConditionsList = ({ conditions }) => {
 
   const deleteOnClick = useCallback(() => {
     setIsDeleted(true);
-    dispatch(ConditionActions.deleteConditionRequest(conditions.id));
+    dispatch(deleteConditionRequest(conditions.id));
   }, [conditions, dispatch]);
 
   const nameOnChange = (e) => {
@@ -33,7 +33,7 @@ const ConditionsList = ({ conditions }) => {
   };
 
   const updateOkOnclick = useCallback(() => {
-    dispatch(ConditionActions.updateConditionRequest({ conditionId: conditions.id, name }));
+    dispatch(upadteConditionRequest({ conditionsId: conditions.id, name }));
     setIsUpdate(false);
     setIsUpdated(true);
   }, [name, conditions.id, dispatch]);
@@ -78,7 +78,7 @@ const ConditionsList = ({ conditions }) => {
 };
 
 ConditionsList.propTypes = {
-  conditions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  conditions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ConditionsList;

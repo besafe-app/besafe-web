@@ -2,27 +2,24 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button } from 'antd';
-import { Creators as ConditionActions } from 'store/ducks/conditionsReducer';
+import { addConditionRequest } from 'store/ducks/conditionsReducer';
 
 const ConditionsForm = () => {
   const [newCondition, setNewCondition] = useState('');
   const dispatch = useDispatch();
   const { isAddingCondition } = useSelector((state) => state.conditionsReducer);
-  console.log(isAddingCondition);
+
   const onChangeInput = useCallback((e) => {
     setNewCondition(e.target.value);
   }, []);
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (!newCondition || !newCondition.trim()) {
-        return alert('Editar Condição.');
-      }
-      dispatch(ConditionActions.addConditionRequest(newCondition));
-      setNewCondition('');
-    },
-    [newCondition, dispatch],
-  );
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!newCondition || !newCondition.trim()) {
+      return setNewCondition('');
+    }
+    dispatch(addConditionRequest(newCondition));
+  };
   return (
     <>
       <Form
