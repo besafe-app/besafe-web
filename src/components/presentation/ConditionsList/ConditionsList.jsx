@@ -44,7 +44,7 @@ const ConditionsList = ({ conditions }) => {
 
   return (
     <List.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {!isUpdate ? <><Typography.Text>{conditions.name}</Typography.Text></>
+      {!isUpdate ? <Typography.Text>{conditions.name}</Typography.Text>
         : <Input value={name} onChange={nameOnChange} />}
       <div style={{ display: 'flex' }}>
         {!isUpdate ? (

@@ -13,8 +13,8 @@ const ConditionsForm = () => {
       '& .MuiButton-root': {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginTop: -29,
-        marginLeft: 550,
+        marginTop: '-29px',
+        marginLeft: '550px',
         cursor: 'pointer',
       },
     },
