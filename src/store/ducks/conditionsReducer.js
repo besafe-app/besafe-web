@@ -11,7 +11,7 @@ export const DELETE_CONDITION_FAILURE = 'DELTE_CONDITION_FAILURE';
 export const INITIAL_STATE = {
   isAddingCondition: false,
   isAdded: false,
-  maxNum: 0,
+  maxNum: 3,
   conditions: [
     {
       id: 1,

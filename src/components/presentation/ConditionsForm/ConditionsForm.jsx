@@ -1,12 +1,27 @@
 /* eslint-disable consistent-return */
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Button } from 'antd';
 import { addConditionRequest } from 'store/ducks/conditionsReducer';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { ContainerForm } from './CondFormStyle';
+
 
 const ConditionsForm = () => {
+  const useStyles = makeStyles({
+    root: {
+      '& .MuiButton-root': {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginTop: -29,
+        marginLeft: 550,
+        cursor: 'pointer',
+      },
+    },
+  })();
   const [newCondition, setNewCondition] = useState('');
   const dispatch = useDispatch();
+
   const { isAddingCondition } = useSelector((state) => state.conditionsReducer);
 
   const onChangeInput = useCallback((e) => {
@@ -15,24 +30,26 @@ const ConditionsForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!newCondition || !newCondition.trim()) {
-      return setNewCondition('');
-    }
     dispatch(addConditionRequest(newCondition));
+    setNewCondition('');
   };
   return (
     <>
-      <Form
-        style={{
-          display: 'flex', marginTop: '60px', marginLeft: '400px', width: '700px',
-        }}
-        onSubmit={onSubmit}
-      >
-        <Input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
-        <Button type="primary" htmlType="submit" loading={isAddingCondition}>
-          Adicionar
-        </Button>
-      </Form>
+      <ContainerForm>
+        <form onSubmit={onSubmit}>
+          <input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className={useStyles.button}
+            size="small"
+            loading={isAddingCondition}
+          >
+            Adicionar
+          </Button>
+        </form>
+      </ContainerForm>
     </>
   );
 };

@@ -6,6 +6,7 @@ import ConditionsList from 'components/presentation/ConditionsList';
 const ConditionsListContainer = () => {
   const { conditions } = useSelector((state) => state.conditionsReducer);
   return (
+
     <List
       style={{ marginTop: '50px', width: '700px', marginLeft: '400px' }}
       header={<div>Condições Cadastradas</div>}
@@ -15,6 +16,7 @@ const ConditionsListContainer = () => {
         <ConditionsList key={conditions.id} conditions={conditions} />
       )}
     />
+
   );
 };
 
