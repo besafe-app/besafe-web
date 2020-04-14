@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { base } from 'utils/constants/endpoints';
+import * as urlsApi from 'utils/constants/endpoints';
 
 const BeSafeApi = axios.create({
-  baseURL: base,
-  origem: '',
+  baseURL: urlsApi.basePath,
   headers: {
     'Content-Type': 'application/json',
+    'access-token': `${localStorage.getItem('access-token')}`,
+    uid: `${localStorage.getItem('uid')}`,
+    client: `${localStorage.getItem('client')}`,
+    'resource-type': `${localStorage.getItem('resource-type')}`,
   },
 });
 
