@@ -9,7 +9,7 @@ import { deleteConditionRequest, upadteConditionRequest } from 'store/ducks/cond
 
 const ConditionsList = ({ conditions }) => {
   const dispatch = useDispatch();
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [canBeUpdated, setCanBeUpdated] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [name, setName] = useState(conditions.name);
@@ -20,8 +20,8 @@ const ConditionsList = ({ conditions }) => {
   }, [conditions.id, conditions.isChange]);
 
   const updateOnclick = useCallback(() => {
-    setIsUpdate(!isUpdate);
-  }, [isUpdate]);
+    setCanBeUpdated(!canBeUpdated);
+  }, [canBeUpdated]);
 
   const deleteOnClick = useCallback(() => {
     setIsDeleted(true);
@@ -34,20 +34,20 @@ const ConditionsList = ({ conditions }) => {
 
   const updateOkOnclick = useCallback(() => {
     dispatch(upadteConditionRequest({ conditionsId: conditions.id, name }));
-    setIsUpdate(false);
+    setCanBeUpdated(false);
     setIsUpdated(true);
   }, [name, conditions.id, dispatch]);
 
   const cancelOnClick = useCallback(() => {
-    setIsUpdate(false);
+    setCanBeUpdated(false);
   }, []);
 
   return (
     <List.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {!isUpdate ? <Typography.Text>{conditions.name}</Typography.Text>
+      {!canBeUpdated ? <Typography.Text>{conditions.name}</Typography.Text>
         : <Input value={name} onChange={nameOnChange} />}
       <div style={{ display: 'flex' }}>
-        {!isUpdate ? (
+        {!canBeUpdated ? (
           <>
             <Button
               style={{ background: 'green', color: 'white' }}

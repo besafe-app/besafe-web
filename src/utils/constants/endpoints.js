@@ -1,4 +1,4 @@
-const base = 'https://besafe-backend.herokuapp.com';
+export const base = 'https://besafe-backend.herokuapp.com';
 
 const service = 'api';
 const version = 'v1';

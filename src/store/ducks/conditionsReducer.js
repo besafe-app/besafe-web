@@ -15,17 +15,22 @@ export const INITIAL_STATE = {
   conditions: [
     {
       id: 1,
-      name: 'Tosse',
+      name: 'Asma',
       isChange: 0,
     },
     {
       id: 2,
-      name: 'Febre',
+      name: 'Câncer',
       isChange: 0,
     },
     {
       id: 3,
-      name: 'Asma',
+      name: 'Diabetes',
+      isChange: 0,
+    },
+    {
+      id: 4,
+      name: 'Doença cardiovascular',
       isChange: 0,
     },
   ],

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { BASE_URL_BESAFE } from 'utils/constants/urls';
+import { base } from 'utils/constants/endpoints';
 
 const BeSafeApi = axios.create({
-  baseURL: BASE_URL_BESAFE,
+  baseURL: base,
   origem: '',
   headers: {
     'Content-Type': 'application/json',

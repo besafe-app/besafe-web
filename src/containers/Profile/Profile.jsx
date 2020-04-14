@@ -138,7 +138,7 @@ const Profile = () => {
             <Table
               className={classes.table}
               size="medium"
-              aria-label="Perfis Cadastrados"
+              aria-label="Cidadãos Cadastrados"
             >
               <TableHeader headCells={headCells} />
               <TableBody>

@@ -38,7 +38,7 @@ const TableToolbar = ({ numSelected }) => {
         id="tableTitle"
         component="div"
       >
-        Perfis Cadastrados
+        Cidadãos Cadastrados
       </Typography>
       {numSelected > 0 && (
         <Typography

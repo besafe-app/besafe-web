@@ -60,7 +60,7 @@ const Menu = () => {
       title: '',
       items: [
         { label: 'Inicial', link: urls.LINKS.HOME },
-        { label: 'Perfis', link: urls.LINKS.PROFILE },
+        { label: 'Cidadãos', link: urls.LINKS.PROFILE },
         { label: 'Médicos', link: urls.LINKS.DOCTORS },
       ],
     },
