@@ -1,3 +1,3 @@
-import BeSafeApi from './BeSafeApi';
+import API from './API';
 
-export default BeSafeApi;
+export default API;

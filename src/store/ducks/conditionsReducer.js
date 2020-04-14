@@ -11,28 +11,28 @@ export const DELETE_CONDITION_FAILURE = 'DELTE_CONDITION_FAILURE';
 export const INITIAL_STATE = {
   isAddingCondition: false,
   isAdded: false,
-  maxNum: 3,
+  maxNum: 0,
   conditions: [
-    {
-      id: 1,
-      name: 'Asma',
-      canBeChange: 0,
-    },
-    {
-      id: 2,
-      name: 'Câncer',
-      canBeChange: 0,
-    },
-    {
-      id: 3,
-      name: 'Diabetes',
-      canBeChange: 0,
-    },
-    {
-      id: 4,
-      name: 'Doença cardiovascular',
-      canBeChange: 0,
-    },
+    // {
+    //   id: 1,
+    //   name: 'Asma',
+    //   canBeChange: 0,
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Câncer',
+    //   canBeChange: 0,
+    // },
+    // {
+    //   id: 3,
+    //   name: 'Diabetes',
+    //   canBeChange: 0,
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Doença cardiovascular',
+    //   canBeChange: 0,
+    // },
   ],
 };
 
@@ -100,7 +100,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isAddingCondition: false,
         isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: false }],
+        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: 0 }],
         maxNum: state.maxNum + 1,
       };
     }

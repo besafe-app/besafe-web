@@ -13,18 +13,20 @@ import {
   deleteConditionSuccess,
   deleteConditionFailure,
 } from 'store/ducks/conditionsReducer';
-import { POST } from 'utils/constants/verbs';
+import { POST, DELETE } from 'utils/constants/verbs';
 import { requestAPI } from 'helpers/requestHelpers';
-import { CONDITIONS } from 'utils/constants/endpoints';
+import { CONDITIONS_CREATE, CONDITIONS_UPDATE, CONDITIONS_DELETE } from 'utils/constants/endpoints';
 
 function* addCondition(action) {
   try {
+    debugger;
     yield requestAPI({
       verb: POST,
-      endPoint: CONDITIONS,
+      endPoint: CONDITIONS_CREATE,
       data: action,
     });
     yield put(addConditionSuccess({ data: action.data }));
+    console.log(addConditionSuccess());
   } catch (e) {
     yield put(addConditionFailure({ e }));
   }
@@ -32,7 +34,14 @@ function* addCondition(action) {
 
 function* updateCondition(action) {
   try {
+    debugger;
+    yield requestAPI({
+      verb: POST,
+      endPoint: CONDITIONS_UPDATE,
+      data: action,
+    });
     yield put(updateConditionSuccess({ data: action.data }));
+    console.log(updateConditionSuccess());
   } catch (e) {
     yield put(updateConditionFailure({ e }));
   }
@@ -40,6 +49,11 @@ function* updateCondition(action) {
 
 function* deleteCondition(action) {
   try {
+    yield requestAPI({
+      verb: DELETE,
+      endPoint: CONDITIONS_DELETE,
+      data: action,
+    });
     yield put(deleteConditionSuccess({ data: action.data }));
   } catch (e) {
     yield put(deleteConditionFailure({ e }));

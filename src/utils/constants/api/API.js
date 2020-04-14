@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as urlsApi from 'utils/constants/endpoints';
 
-const BeSafeApi = axios.create({
+const API = axios.create({
   baseURL: urlsApi.basePath,
   headers: {
     'Content-Type': 'application/json',
@@ -12,4 +12,4 @@ const BeSafeApi = axios.create({
   },
 });
 
-export default BeSafeApi;
+export default API;
