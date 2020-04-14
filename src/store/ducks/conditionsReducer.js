@@ -100,7 +100,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isAddingCondition: false,
         isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: false }],
+        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: 0 }],
         maxNum: state.maxNum + 1,
       };
     }
