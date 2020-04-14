@@ -16,22 +16,22 @@ export const INITIAL_STATE = {
     {
       id: 1,
       name: 'Asma',
-      isChange: 0,
+      canBeChange: 0,
     },
     {
       id: 2,
       name: 'Câncer',
-      isChange: 0,
+      canBeChange: 0,
     },
     {
       id: 3,
       name: 'Diabetes',
-      isChange: 0,
+      canBeChange: 0,
     },
     {
       id: 4,
       name: 'Doença cardiovascular',
-      isChange: 0,
+      canBeChange: 0,
     },
   ],
 };
@@ -100,7 +100,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isAddingCondition: false,
         isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, isChange: false }],
+        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: false }],
         maxNum: state.maxNum + 1,
       };
     }
@@ -116,7 +116,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       const conditions = state.conditions.map((c) => {
         if (c.id === action.data.id) {
           c.name = action.data.name;
-          c.isChange = c.isChange === 0 ? 1 : 0;
+          c.canBeChange = c.canBeChange === 0 ? 1 : 0;
         }
         return c;
       });

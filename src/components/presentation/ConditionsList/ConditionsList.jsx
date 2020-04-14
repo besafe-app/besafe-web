@@ -17,7 +17,7 @@ const ConditionsList = ({ conditions }) => {
   useEffect(() => {
     setIsDeleted(false);
     setIsUpdated(false);
-  }, [conditions.id, conditions.isChange]);
+  }, [conditions.id, conditions.canBeChange]);
 
   const updateOnclick = useCallback(() => {
     setCanBeUpdated(!canBeUpdated);
