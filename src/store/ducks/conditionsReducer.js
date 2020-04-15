@@ -116,7 +116,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       const conditions = state.conditions.map((c) => {
         if (c.id === action.data.id) {
           c.name = action.data.name;
-          c.canBeChange = c.canBeChange === false;
+          c.canBeChange = !c.canBeChange;
         }
         return c;
       });
