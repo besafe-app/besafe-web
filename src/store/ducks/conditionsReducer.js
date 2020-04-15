@@ -13,26 +13,26 @@ export const INITIAL_STATE = {
   isAdded: false,
   maxNum: 0,
   conditions: [
-    // {
-    //   id: 1,
-    //   name: 'Asma',
-    //   canBeChange: 0,
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Câncer',
-    //   canBeChange: 0,
-    // },
-    // {
-    //   id: 3,
-    //   name: 'Diabetes',
-    //   canBeChange: 0,
-    // },
-    // {
-    //   id: 4,
-    //   name: 'Doença cardiovascular',
-    //   canBeChange: 0,
-    // },
+    {
+      id: 1,
+      name: 'Asma',
+      canBeChange: false,
+    },
+    {
+      id: 2,
+      name: 'Câncer',
+      canBeChange: false,
+    },
+    {
+      id: 3,
+      name: 'Diabetes',
+      canBeChange: false,
+    },
+    {
+      id: 4,
+      name: 'Doença cardiovascular',
+      canBeChange: false,
+    },
   ],
 };
 
@@ -116,7 +116,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       const conditions = state.conditions.map((c) => {
         if (c.id === action.data.id) {
           c.name = action.data.name;
-          c.canBeChange = c.canBeChange === 0 ? 1 : 0;
+          c.canBeChange = !c.canBeChange;
         }
         return c;
       });
