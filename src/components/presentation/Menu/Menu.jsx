@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators as AuthActions } from 'store/ducks/authReducer';
-import { Divider, Drawer, List, ListItem } from '@material-ui/core';
+import {
+  Divider, Drawer, List, ListItem,
+} from '@material-ui/core';
 import ListTitle from 'components/core/ListTitle';
 import LogoutLink from 'components/presentation/LogoutLink';
 import { makeStyles } from '@material-ui/core/styles';
@@ -58,7 +60,7 @@ const Menu = () => {
       title: '',
       items: [
         { label: 'Inicial', link: urls.LINKS.HOME },
-        { label: 'Perfis', link: urls.LINKS.PROFILE },
+        { label: 'Cidadãos', link: urls.LINKS.PROFILE },
         { label: 'Médicos', link: urls.LINKS.DOCTORS },
       ],
     },

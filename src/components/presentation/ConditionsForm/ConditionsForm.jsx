@@ -1,8 +1,9 @@
-import React from 'react';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+/* eslint-disable consistent-return */
+import React, { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addConditionRequest } from 'store/ducks/conditionsReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { ContainerForm } from './CondFormStyle';
 
 
@@ -11,42 +12,44 @@ const ConditionsForm = () => {
     root: {
       '& .MuiButton-root': {
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'flex-end',
-        marginTop: 100,
-        marginLeft: 50,
-      },
-      '& .MuiButton-containedSecondary': {
-        backgroundColor: '#DA1F26',
+        marginTop: '-29px',
+        marginLeft: '550px',
+        cursor: 'pointer',
       },
     },
   })();
+  const [newCondition, setNewCondition] = useState('');
+  const dispatch = useDispatch();
+
+  const { isAddingCondition } = useSelector((state) => state.conditionsReducer);
+
+  const onChangeInput = useCallback((e) => {
+    setNewCondition(e.target.value);
+  }, []);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addConditionRequest(newCondition));
+    setNewCondition('');
+  };
   return (
     <>
-      <ContainerForm role="form">
-        <input id="description" placeholder="Adicione uma condição pré-existente" />
-        <div className={useStyles.root}>
+      <ContainerForm>
+        <form onSubmit={onSubmit}>
+          <input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
+            type="submit"
             className={useStyles.button}
-            startIcon={<AddCircleOutlineIcon />}
+            size="small"
+            loading={isAddingCondition}
           >
             Adicionar
           </Button>
-        </div>
-        <div className={useStyles.root}>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={useStyles.button}
-            startIcon={<DeleteIcon />}
-          >
-            Remover
-          </Button>
-        </div>
+        </form>
       </ContainerForm>
-
     </>
   );
 };
