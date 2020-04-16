@@ -4,9 +4,9 @@ export const ADD_CONDITION_FAILURE = 'ADD_CONDITION_FAILURE';
 export const UPDATE_CONDITION_REQUEST = 'UPDATE_CONDITION_REQUEST';
 export const UPDATE_CONDITION_SUCCESS = 'UPDATE_CONDITION_SUCCESS';
 export const UPDATE_CONDITION_FAILURE = 'UPDATE_CONDITION_FAILURE';
-export const DELETE_CONDITION_REQUEST = 'DELTE_CONDITION_REQUEST';
-export const DELETE_CONDITION_SUCCESS = 'DELTE_CONDITION_SUCCESS';
-export const DELETE_CONDITION_FAILURE = 'DELTE_CONDITION_FAILURE';
+export const DELETE_CONDITION_REQUEST = 'DELETE_CONDITION_REQUEST';
+export const DELETE_CONDITION_SUCCESS = 'DELETE_CONDITION_SUCCESS';
+export const DELETE_CONDITION_FAILURE = 'DELETE_CONDITION_FAILURE';
 
 export const INITIAL_STATE = {
   isAddingCondition: false,
@@ -100,7 +100,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isAddingCondition: false,
         isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: 0 }],
+        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: false }],
         maxNum: state.maxNum + 1,
       };
     }

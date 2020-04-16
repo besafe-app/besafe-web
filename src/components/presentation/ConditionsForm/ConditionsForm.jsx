@@ -44,7 +44,7 @@ const ConditionsForm = () => {
             type="submit"
             className={useStyles.button}
             size="small"
-            loading={isAddingCondition}
+            loading={isAddingCondition.toString()}
           >
             Adicionar
           </Button>

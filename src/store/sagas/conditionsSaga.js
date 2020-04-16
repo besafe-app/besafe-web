@@ -19,14 +19,14 @@ import { CONDITIONS_CREATE, CONDITIONS_UPDATE, CONDITIONS_DELETE } from 'utils/c
 
 function* addCondition(action) {
   try {
-    debugger;
     yield requestAPI({
       verb: POST,
       endPoint: CONDITIONS_CREATE,
-      data: action,
+      data: {
+        name: action.data,
+      },
     });
     yield put(addConditionSuccess({ data: action.data }));
-    console.log(addConditionSuccess());
   } catch (e) {
     yield put(addConditionFailure({ e }));
   }
@@ -34,14 +34,14 @@ function* addCondition(action) {
 
 function* updateCondition(action) {
   try {
-    debugger;
     yield requestAPI({
       verb: POST,
       endPoint: CONDITIONS_UPDATE,
-      data: action,
+      data: {
+        action,
+      },
     });
     yield put(updateConditionSuccess({ data: action.data }));
-    console.log(updateConditionSuccess());
   } catch (e) {
     yield put(updateConditionFailure({ e }));
   }
