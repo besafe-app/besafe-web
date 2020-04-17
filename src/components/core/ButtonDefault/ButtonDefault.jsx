@@ -4,12 +4,13 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const ButtonDefault = ({
-  value, onClick, color, size,
+  value, onClick, color, size, backgroundColor,
 }) => {
   const materialStyles = makeStyles({
     root: {
       color,
       borderColor: color,
+      backgroundColor,
     },
   })();
 
@@ -19,6 +20,7 @@ const ButtonDefault = ({
       onClick={onClick}
       classes={materialStyles}
       size={size}
+      backgroundColor={backgroundColor}
     >
       {value}
     </Button>
@@ -30,11 +32,13 @@ ButtonDefault.propTypes = {
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string,
   size: PropTypes.string,
+  backgroundColor: PropTypes.string,
 };
 
 
 ButtonDefault.defaultProps = {
   color: '#DA1F26',
   size: 'medium',
+  backgroundColor: '',
 };
 export default ButtonDefault;

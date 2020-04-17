@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import urls from 'utils/constants/urls';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
@@ -14,6 +16,8 @@ import ContainerDefault from 'components/core/ContainerDefault';
 import Menu from 'components/presentation/Menu';
 import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
+import ButtonDefault from 'components/core/ButtonDefault';
+import { ButtonContainer } from './UsersStyle';
 
 
 const users = [
@@ -39,6 +43,50 @@ const users = [
   },
   {
     id: 4,
+    name: 'Ana Furtado',
+    email: 'anafurtado@ioasys.com.br',
+    phone: '(31)98666-6666',
+  },
+  {
+    id: 5,
+    name: 'Maria Lima',
+    email: 'marialima@ioasys.com.br',
+    phone: '(31)98666-6666',
+
+  },
+  {
+    id: 6,
+    name: 'Daniel Vieira',
+    email: 'danielvieira@ioasys.com.br',
+    phone: '(31)99666-6666',
+
+  },
+  {
+    id: 7,
+    name: 'João da Silva',
+    email: 'joaosilva@ioasys.com.br',
+    phone: '(31)99666-6666',
+  },
+  {
+    id: 8,
+    name: 'Ana Furtado',
+    email: 'anafurtado@ioasys.com.br',
+    phone: '(31)98666-6666',
+  },
+  {
+    id: 9,
+    name: 'João da Silva',
+    email: 'joaosilva@ioasys.com.br',
+    phone: '(31)99666-6666',
+  },
+  {
+    id: 10,
+    name: 'Ana Furtado',
+    email: 'anafurtado@ioasys.com.br',
+    phone: '(31)98666-6666',
+  },
+  {
+    id: 11,
     name: 'Ana Furtado',
     email: 'anafurtado@ioasys.com.br',
     phone: '(31)98666-6666',
@@ -167,6 +215,16 @@ const Users = () => {
                 )}
               </TableBody>
             </Table>
+            <ButtonContainer>
+              <Link to={urls.ROUTES.SIGNUP}>
+                <ButtonDefault
+                  variant="contained"
+                  backgrounColor="#DA1F26"
+                  value="Novo Usuário"
+                  size="small"
+                />
+              </Link>
+            </ButtonContainer>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10]}
