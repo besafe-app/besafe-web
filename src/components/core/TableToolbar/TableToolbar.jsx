@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-const TableToolbar = ({ numSelected }) => {
+const TableToolbar = ({ numSelected, title }) => {
   const classes = makeStyles((theme) => ({
     root: {
       paddingLeft: theme.spacing(2),
@@ -38,7 +38,7 @@ const TableToolbar = ({ numSelected }) => {
         id="tableTitle"
         component="div"
       >
-        Cidadãos Cadastrados
+        {title}
       </Typography>
       {numSelected > 0 && (
         <Typography
@@ -63,6 +63,11 @@ const TableToolbar = ({ numSelected }) => {
 
 TableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  title: PropTypes.string,
+};
+
+TableToolbar.defaultProps = {
+  title: '',
 };
 
 export default TableToolbar;

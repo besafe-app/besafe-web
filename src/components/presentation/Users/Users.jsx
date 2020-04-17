@@ -16,34 +16,32 @@ import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
 
 
-const profiles = [
+const users = [
   {
     id: 1,
-    name: 'Paloma',
-    birthday: '19931016',
-    gerend: 'femele',
-    conditions: ['Tosse seca', 'febre'],
+    name: 'Maria Lima',
+    email: 'marialima@ioasys.com.br',
+    phone: '(31)98666-6666',
+
   },
   {
     id: 2,
-    name: 'Daniel',
-    birthday: '19931016',
-    gerend: 'male',
-    conditions: ['Tosse seca', 'febre'],
+    name: 'Daniel Vieira',
+    email: 'danielvieira@ioasys.com.br',
+    phone: '(31)99666-6666',
+
   },
   {
     id: 3,
-    name: 'Ermelinda',
-    birthday: '19931016',
-    gerend: 'femele',
-    conditions: ['Tosse seca', 'febre'],
+    name: 'João da Silva',
+    email: 'joaosilva@ioasys.com.br',
+    phone: '(31)99666-6666',
   },
   {
     id: 4,
-    name: 'John',
-    birthday: '19931016',
-    gerend: 'male',
-    conditions: ['Tosse seca', 'febre'],
+    name: 'Ana Furtado',
+    email: 'anafurtado@ioasys.com.br',
+    phone: '(31)98666-6666',
   },
 ];
 
@@ -53,20 +51,16 @@ const headCells = [
     label: 'Nome Completo',
   },
   {
-    id: 'birthday',
-    label: 'Data de Nascimento',
+    id: 'email',
+    label: 'E-mail',
   },
   {
-    id: 'gerend',
-    label: 'Gênero',
-  },
-  {
-    id: 'conditions',
-    label: 'Condições',
+    id: 'phone',
+    label: 'Telefone',
   },
 ];
 
-const Profile = () => {
+const Users = () => {
   const classes = makeStyles({
     root: {
       width: '100%',
@@ -98,7 +92,7 @@ const Profile = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const isSelected = (id) => selected.indexOf(id) !== -1;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, profiles.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
 
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
@@ -133,39 +127,36 @@ const Profile = () => {
       <Menu />
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <TableToolbar numSelected={selected.length} title="Cidadãos Cadastrados" />
+          <TableToolbar numSelected={selected.length} title="Administradores" />
           <TableContainer>
             <Table
               className={classes.table}
               size="medium"
-              aria-label="Cidadãos Cadastrados"
+              aria-label="Usuários"
             >
               <TableHeader headCells={headCells} />
               <TableBody>
-                {profiles
+                {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((profile) => {
-                    const isItemSelected = isSelected(profile.id);
+                  .map((user) => {
+                    const isItemSelected = isSelected(user.id);
                     return (
                       <TableRow
                         classes={styleRow}
                         hover
-                        onClick={(event) => handleClick(event, profile.id)}
+                        onClick={(event) => handleClick(event, user.id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={profile.id}
+                        key={user.id}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} />
                         </TableCell>
-                        <TableCell align="left">{profile.name}</TableCell>
-                        <TableCell align="left">{profile.birthday}</TableCell>
-                        <TableCell align="left">{profile.gerend}</TableCell>
-                        <TableCell align="left">
-                          {profile.conditions.map((condition) => (`${condition}, `))}
-                        </TableCell>
+                        <TableCell align="left">{user.name}</TableCell>
+                        <TableCell align="left">{user.email}</TableCell>
+                        <TableCell align="left">{user.phone}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -180,7 +171,7 @@ const Profile = () => {
           <TablePagination
             rowsPerPageOptions={[10]}
             component="div"
-            count={profiles.length}
+            count={users.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
@@ -192,4 +183,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Users;
