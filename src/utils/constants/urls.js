@@ -1,6 +1,7 @@
 const urls = {
   ROUTES: {
     APP: '/',
+    SIGNUP: '/signup',
     HOME: '/home',
     PROFILE: '/profile',
     DOCTORS: '/doctors',
@@ -10,6 +11,7 @@ const urls = {
   },
   LINKS: {
     APP: '/',
+    SIGNUP: '/signup',
     HOME: '/home',
     PROFILE: '/profile',
     DOCTORS: '/doctors',
