@@ -7,33 +7,17 @@ export const UPDATE_CONDITION_FAILURE = 'UPDATE_CONDITION_FAILURE';
 export const DELETE_CONDITION_REQUEST = 'DELETE_CONDITION_REQUEST';
 export const DELETE_CONDITION_SUCCESS = 'DELETE_CONDITION_SUCCESS';
 export const DELETE_CONDITION_FAILURE = 'DELETE_CONDITION_FAILURE';
+export const REQUEST_CONDITION = 'REQUEST_CONDITION';
+export const SUCCESS_CONDITION = 'SUCCESS_CONDITION';
+export const FAILURE_CONDITION = 'FAILURE_CONDITION';
 
 export const INITIAL_STATE = {
   isAddingCondition: false,
   isAdded: false,
   maxNum: 0,
-  conditions: [
-    {
-      id: 1,
-      name: 'Asma',
-      canBeChange: false,
-    },
-    {
-      id: 2,
-      name: 'Câncer',
-      canBeChange: false,
-    },
-    {
-      id: 3,
-      name: 'Diabetes',
-      canBeChange: false,
-    },
-    {
-      id: 4,
-      name: 'Doença cardiovascular',
-      canBeChange: false,
-    },
-  ],
+  conditions: [],
+  loading: false,
+  error: false,
 };
 
 export const addConditionRequest = (newCondition) => ({
@@ -82,6 +66,21 @@ export const updateConditionSuccess = ({ data }) => ({
 
 export const updateConditionFailure = ({ e }) => ({
   type: UPDATE_CONDITION_FAILURE,
+  error: e,
+});
+
+export const requestCondition = (name) => ({
+  type: REQUEST_CONDITION,
+  name,
+});
+
+export const successCondition = (payload) => ({
+  type: SUCCESS_CONDITION,
+  payload,
+});
+
+export const failureCondition = ({ e }) => ({
+  type: SUCCESS_CONDITION,
   error: e,
 });
 
@@ -142,6 +141,15 @@ const reducer = (state = INITIAL_STATE, action) => {
     }
     case DELETE_CONDITION_FAILURE: {
       return state;
+    }
+    case REQUEST_CONDITION: {
+      return { ...state, loading: true };
+    }
+    case SUCCESS_CONDITION: {
+      return { conditions: action.payload.conditions, loading: false, error: false };
+    }
+    case FAILURE_CONDITION: {
+      return { conditions: [], loading: false, error: true };
     }
     default:
       return state;
