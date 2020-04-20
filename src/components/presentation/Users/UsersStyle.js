@@ -6,5 +6,4 @@ margin-top: -80px;
 margin-left: 400px;
 display: flex;
 justify-content: center;
-
 `;

@@ -183,6 +183,17 @@ const Users = () => {
               aria-label="Usuários"
             >
               <TableHeader headCells={headCells} />
+              {/* <ButtonContainer>
+                <Link to={urls.ROUTES.SIGNUP}>
+                  <ButtonDefault
+                    variant="contained"
+                    backgrounColor="#DA1F26"
+                    value="Novo Usuário"
+                    size="small"
+                    z-index={9999}
+                  />
+                </Link>
+              </ButtonContainer> */}
               <TableBody>
                 {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -209,22 +220,12 @@ const Users = () => {
                     );
                   })}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={5} />
-                  </TableRow>
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={5} />
+                </TableRow>
                 )}
               </TableBody>
             </Table>
-            <ButtonContainer>
-              <Link to={urls.ROUTES.SIGNUP}>
-                <ButtonDefault
-                  variant="contained"
-                  backgrounColor="#DA1F26"
-                  value="Novo Usuário"
-                  size="small"
-                />
-              </Link>
-            </ButtonContainer>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10]}
