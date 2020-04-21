@@ -133,7 +133,7 @@ const Profile = () => {
       <Menu />
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <TableToolbar numSelected={selected.length} title="Cidadãos Cadastrados" />
+          <TableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
               className={classes.table}

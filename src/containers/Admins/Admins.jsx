@@ -1,9 +1,11 @@
 import React from 'react';
-import Users from 'components/presentation/Users';
+import Menu from 'components/presentation/Menu';
+import PageHeader from 'components/core/PageHeader';
 
 const Admins = () => (
   <>
-    <Users />
+    <Menu />
+    <PageHeader title="Administradores" />
   </>
 );
 
