@@ -10,7 +10,6 @@ const ButtonDefault = ({
     root: {
       color,
       borderColor: color,
-      backgroundColor,
     },
   })();
 
@@ -32,13 +31,12 @@ ButtonDefault.propTypes = {
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string,
   size: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  backgroundColor: PropTypes.string.isRequired,
 };
 
 
 ButtonDefault.defaultProps = {
   color: '#DA1F26',
   size: 'medium',
-  backgroundColor: '',
 };
 export default ButtonDefault;

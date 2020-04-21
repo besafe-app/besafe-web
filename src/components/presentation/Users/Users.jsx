@@ -47,50 +47,6 @@ const users = [
     email: 'anafurtado@ioasys.com.br',
     phone: '(31)98666-6666',
   },
-  {
-    id: 5,
-    name: 'Maria Lima',
-    email: 'marialima@ioasys.com.br',
-    phone: '(31)98666-6666',
-
-  },
-  {
-    id: 6,
-    name: 'Daniel Vieira',
-    email: 'danielvieira@ioasys.com.br',
-    phone: '(31)99666-6666',
-
-  },
-  {
-    id: 7,
-    name: 'João da Silva',
-    email: 'joaosilva@ioasys.com.br',
-    phone: '(31)99666-6666',
-  },
-  {
-    id: 8,
-    name: 'Ana Furtado',
-    email: 'anafurtado@ioasys.com.br',
-    phone: '(31)98666-6666',
-  },
-  {
-    id: 9,
-    name: 'João da Silva',
-    email: 'joaosilva@ioasys.com.br',
-    phone: '(31)99666-6666',
-  },
-  {
-    id: 10,
-    name: 'Ana Furtado',
-    email: 'anafurtado@ioasys.com.br',
-    phone: '(31)98666-6666',
-  },
-  {
-    id: 11,
-    name: 'Ana Furtado',
-    email: 'anafurtado@ioasys.com.br',
-    phone: '(31)98666-6666',
-  },
 ];
 
 const headCells = [
@@ -176,6 +132,16 @@ const Users = () => {
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <TableToolbar numSelected={selected.length} title="Administradores" />
+          <ButtonContainer>
+            <Link to={urls.ROUTES.SIGNUP}>
+              <ButtonDefault
+                variant="contained"
+                backgrounColor="#DA1F26"
+                value="Novo Usuário"
+                size="small"
+              />
+            </Link>
+          </ButtonContainer>
           <TableContainer>
             <Table
               className={classes.table}
@@ -183,17 +149,6 @@ const Users = () => {
               aria-label="Usuários"
             >
               <TableHeader headCells={headCells} />
-              {/* <ButtonContainer>
-                <Link to={urls.ROUTES.SIGNUP}>
-                  <ButtonDefault
-                    variant="contained"
-                    backgrounColor="#DA1F26"
-                    value="Novo Usuário"
-                    size="small"
-                    z-index={9999}
-                  />
-                </Link>
-              </ButtonContainer> */}
               <TableBody>
                 {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
