@@ -4,8 +4,7 @@ import {
   List, Typography, Button, Input,
 } from 'antd';
 import { useDispatch } from 'react-redux';
-import { deleteConditionRequest, upadteConditionRequest } from 'store/ducks/conditionsReducer';
-
+import { deleteConditionRequest, upadteConditionRequest, requestCondition } from 'store/ducks/conditionsReducer';
 
 const ConditionsList = ({ conditions }) => {
   const dispatch = useDispatch();
@@ -14,10 +13,18 @@ const ConditionsList = ({ conditions }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [name, setName] = useState(conditions.name);
 
+
   useEffect(() => {
     setIsDeleted(false);
     setIsUpdated(false);
   }, [conditions.id, conditions.canBeChange]);
+
+  useEffect(() => {
+    const fetchRequestCondition = async () => {
+      dispatch(requestCondition(conditions.name));
+    };
+    fetchRequestCondition();
+  }, [conditions.name]);
 
   const updateOnclick = useCallback(() => {
     setCanBeUpdated(!canBeUpdated);
