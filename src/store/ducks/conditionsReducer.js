@@ -35,7 +35,6 @@ export const addConditionFailure = ({ e }) => ({
   error: e,
 });
 
-
 export const deleteConditionRequest = (conditionsId) => ({
   type: DELETE_CONDITION_REQUEST,
   data: conditionsId,
@@ -69,21 +68,19 @@ export const updateConditionFailure = ({ e }) => ({
   error: e,
 });
 
-export const requestCondition = (name) => ({
+export const requestCondition = () => ({
   type: REQUEST_CONDITION,
-  name,
 });
 
-export const successCondition = (payload) => ({
+export const successCondition = (conditions) => ({
   type: SUCCESS_CONDITION,
-  payload,
+  payload: conditions,
 });
 
 export const failureCondition = ({ e }) => ({
-  type: SUCCESS_CONDITION,
+  type: FAILURE_CONDITION,
   error: e,
 });
-
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -99,7 +96,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isAddingCondition: false,
         isAdded: true,
-        conditions: [...state.conditions, { id: state.maxNum + 1, name: action.data, canBeChange: false }],
+        conditions: [
+          ...state.conditions,
+          { id: state.maxNum + 1, name: action.data, canBeChange: false },
+        ],
         maxNum: state.maxNum + 1,
       };
     }
@@ -146,7 +146,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, loading: true };
     }
     case SUCCESS_CONDITION: {
-      return { conditions: action.payload.conditions, loading: false, error: false };
+      return {
+        conditions: action.payload.conditions,
+        loading: false,
+        error: false,
+      };
     }
     case FAILURE_CONDITION: {
       return { conditions: [], loading: false, error: true };

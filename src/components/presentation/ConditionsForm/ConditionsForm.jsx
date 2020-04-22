@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { ContainerForm } from './CondFormStyle';
 
-
 const ConditionsForm = () => {
   const useStyles = makeStyles({
     root: {
@@ -37,14 +36,18 @@ const ConditionsForm = () => {
     <>
       <ContainerForm>
         <form onSubmit={onSubmit}>
-          <input placeholder="Adicione uma condição pré-existente" onChange={onChangeInput} value={newCondition} />
+          <input
+            placeholder="Adicione uma condição pré-existente"
+            onChange={onChangeInput}
+            value={newCondition}
+          />
           <Button
             variant="contained"
             color="primary"
             type="submit"
             className={useStyles.button}
             size="small"
-            loading={isAddingCondition.toString()}
+            loading={isAddingCondition ? isAddingCondition.toString() : 'false'}
           >
             Adicionar
           </Button>

@@ -1,7 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import {
-  takeLatest, put, call,
-} from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import {
   ADD_CONDITION_REQUEST,
   UPDATE_CONDITION_REQUEST,
@@ -19,7 +17,10 @@ import {
 import { POST, DELETE, GET } from 'utils/constants/verbs';
 import { requestAPI } from 'helpers/requestHelpers';
 import {
-  CONDITIONS_CREATE, CONDITIONS_UPDATE, CONDITIONS_DELETE, GET_CONDITION,
+  CONDITIONS_CREATE,
+  CONDITIONS_UPDATE,
+  CONDITIONS_DELETE,
+  GET_CONDITION,
 } from 'utils/constants/endpoints';
 
 function* addCondition(action) {
@@ -66,17 +67,13 @@ function* deleteCondition(action) {
   }
 }
 
-function* getCondition({ payload, action }) {
+function* getCondition() {
   try {
-    const response = yield call(requestAPI({
+    const response = yield requestAPI({
       verb: GET,
       endPoint: GET_CONDITION,
-      data: {
-        conditions: payload.data,
-        name: action.data,
-      },
-    }));
-    yield put(successCondition({ payload: { conditions: response } }));
+    });
+    yield put(successCondition({ conditions: response }));
   } catch (error) {
     yield put(failureCondition({ error }));
   }
