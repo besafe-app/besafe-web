@@ -67,7 +67,7 @@ const Menu = () => {
     {
       title: 'Saúde',
       items: [
-        { label: 'Condições Pré-existentes', link: urls.LINKS.CONDITIONS },
+        { label: 'Condições Preexistentes', link: urls.LINKS.CONDITIONS },
         { label: 'Sintomas', link: urls.LINKS.SYMPTOMS },
       ],
     },

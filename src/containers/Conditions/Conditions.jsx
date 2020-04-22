@@ -7,7 +7,7 @@ import ConditionsListContainer from 'components/presentation/ConditionsListConta
 const Conditions = () => (
   <>
     <Menu />
-    <PageHeader title="Condições Pré-Existentes Cadastradas" />
+    <PageHeader title="Condições Preexistentes Cadastradas" />
     <ConditionsForm />
     <ConditionsListContainer />
   </>

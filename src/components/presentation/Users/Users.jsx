@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import urls from 'utils/constants/urls';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
@@ -14,6 +16,8 @@ import ContainerDefault from 'components/core/ContainerDefault';
 import Menu from 'components/presentation/Menu';
 import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
+import ButtonDefault from 'components/core/ButtonDefault';
+import { ButtonContainer } from './UsersStyle';
 
 
 const users = [
@@ -128,6 +132,16 @@ const Users = () => {
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <TableToolbar numSelected={selected.length} title="Administradores" />
+          <ButtonContainer>
+            <Link to={urls.ROUTES.SIGNUP}>
+              <ButtonDefault
+                variant="contained"
+                backgrounColor="#DA1F26"
+                value="Novo Usuário"
+                size="small"
+              />
+            </Link>
+          </ButtonContainer>
           <TableContainer>
             <Table
               className={classes.table}
@@ -161,9 +175,9 @@ const Users = () => {
                     );
                   })}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={5} />
-                  </TableRow>
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={5} />
+                </TableRow>
                 )}
               </TableBody>
             </Table>
