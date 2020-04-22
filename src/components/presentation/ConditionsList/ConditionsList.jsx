@@ -4,7 +4,10 @@ import {
   List, Typography, Button, Input,
 } from 'antd';
 import { useDispatch } from 'react-redux';
-import { deleteConditionRequest, upadteConditionRequest, requestCondition } from 'store/ducks/conditionsReducer';
+import {
+  deleteConditionRequest,
+  upadteConditionRequest,
+} from 'store/ducks/conditionsReducer';
 
 const ConditionsList = ({ conditions }) => {
   const dispatch = useDispatch();
@@ -13,18 +16,10 @@ const ConditionsList = ({ conditions }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [name, setName] = useState(conditions.name);
 
-
   useEffect(() => {
     setIsDeleted(false);
     setIsUpdated(false);
   }, [conditions.id, conditions.canBeChange]);
-
-  useEffect(() => {
-    const fetchRequestCondition = async () => {
-      dispatch(requestCondition(conditions.name));
-    };
-    fetchRequestCondition();
-  }, [conditions.name]);
 
   const updateOnclick = useCallback(() => {
     setCanBeUpdated(!canBeUpdated);
@@ -51,8 +46,11 @@ const ConditionsList = ({ conditions }) => {
 
   return (
     <List.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {!canBeUpdated ? <Typography.Text>{conditions.name}</Typography.Text>
-        : <Input value={name} onChange={nameOnChange} />}
+      {!canBeUpdated ? (
+        <Typography.Text>{conditions.name}</Typography.Text>
+      ) : (
+        <Input value={name} onChange={nameOnChange} />
+      )}
       <div style={{ display: 'flex' }}>
         {!canBeUpdated ? (
           <>
@@ -63,22 +61,20 @@ const ConditionsList = ({ conditions }) => {
             >
               Editar
             </Button>
-            <Button type="danger" onClick={deleteOnClick} loading={isDeleted}>Remover</Button>
+            <Button type="danger" onClick={deleteOnClick} loading={isDeleted}>
+              Remover
+            </Button>
           </>
-        )
-          : (
-            <>
-              <Button
-                type="primary"
-                onClick={updateOkOnclick}
-              >
-                Salvar
-              </Button>
-              <Button type="danger" onClick={cancelOnClick}>Cancelar</Button>
-
-            </>
-          )}
-
+        ) : (
+          <>
+            <Button type="primary" onClick={updateOkOnclick}>
+              Salvar
+            </Button>
+            <Button type="danger" onClick={cancelOnClick}>
+              Cancelar
+            </Button>
+          </>
+        )}
       </div>
     </List.Item>
   );
