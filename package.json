@@ -1,6 +1,10 @@
 {
   "name": "disease-web",
   "version": "0.1.0",
+  "engines": {
+    "node": "13.12.x",
+    "yarn": "1.x"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.7",
@@ -21,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-window": "^1.8.5",
     "redux": "^4.0.5",

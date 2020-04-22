@@ -4,6 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import urls from 'utils/constants/urls';
 import Auth from 'containers/Auth';
+import SignUp from 'containers/SignUp';
 import Home from 'containers/Home';
 import Profile from 'containers/Profile';
 import Doctors from 'containers/Doctors';
@@ -31,6 +32,7 @@ const Routes = () => (
   <ConnectedRouter history={history}>
     <Switch>
       <Route exact path={urls.ROUTES.APP} component={Auth} />
+      <Route exact path={urls.ROUTES.SIGNUP} component={SignUp} />
       <PrivateRoute exact path={urls.ROUTES.HOME} component={Home} />
       <PrivateRoute exact path={urls.ROUTES.PROFILE} component={Profile} />
       <PrivateRoute exact path={urls.ROUTES.DOCTORS} component={Doctors} />
