@@ -74,7 +74,7 @@ export const requestCondition = () => ({
 
 export const successCondition = (conditions) => ({
   type: SUCCESS_CONDITION,
-  payload: conditions,
+  data: conditions,
 });
 
 export const failureCondition = ({ e }) => ({
@@ -147,7 +147,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     }
     case SUCCESS_CONDITION: {
       return {
-        conditions: action.payload.conditions,
+        conditions: action.data.conditions,
         loading: false,
         error: false,
       };

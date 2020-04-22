@@ -35,7 +35,6 @@ const ConditionsList = ({ conditions }) => {
   };
 
   const updateOkOnclick = useCallback(() => {
-    console.log(conditions.id);
     dispatch(upadteConditionRequest({ conditionsId: conditions.id, name }));
     setCanBeUpdated(false);
     setIsUpdated(true);

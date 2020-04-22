@@ -59,7 +59,7 @@ function* deleteCondition(action) {
     yield requestAPI({
       verb: DELETE,
       endPoint: CONDITIONS_DELETE,
-      data: action,
+      id: action.data,
     });
     yield put(deleteConditionSuccess({ data: action.data }));
   } catch (e) {
