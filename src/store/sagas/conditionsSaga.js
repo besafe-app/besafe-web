@@ -44,9 +44,9 @@ function* updateCondition(action) {
       verb: POST,
       endPoint: CONDITIONS_UPDATE,
       data: {
-        id: action.data,
-        name: action.data,
+        name: action.data.name,
       },
+      id: action.data.id,
     });
     yield put(updateConditionSuccess({ data: action.data }));
   } catch (e) {
