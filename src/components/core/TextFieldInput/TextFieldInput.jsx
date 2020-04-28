@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
+
 const TextFieldInput = ({
   label,
   name,
@@ -28,6 +29,13 @@ const TextFieldInput = ({
         '&.Mui-focused fieldset': {
           borderColor: '#f9ebea',
         },
+      },
+      '&.MuiFormControl-fullWidth': {
+        width: '90%',
+      },
+      '&.MuiFormControl-root': {
+        marginBottom: '-20%',
+        top: '-10%',
       },
     },
   })(TextField);
