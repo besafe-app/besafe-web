@@ -1,7 +1,7 @@
 import React from 'react';
 import TextFieldInput from 'components/core/TextFieldInput';
 import ButtonDefault from 'components/core/ButtonDefault';
-import CoronaImg from 'assets/img/corona.png';
+import BeSafeImg from 'assets/img/besafe-logo.png';
 import {
   Container, Body, SubmitRow, ImgLogo,
 } from './SignUpPresentationStyle';
@@ -10,7 +10,7 @@ export default function SignUp() {
   return (
     <Body>
       <Container>
-        <ImgLogo src={CoronaImg} />
+        <ImgLogo src={BeSafeImg} />
         <TextFieldInput label="Nome Completo" fullWidth />
         <TextFieldInput label="Email" fullWidth />
         <TextFieldInput label="Telefone" fullWidth />
