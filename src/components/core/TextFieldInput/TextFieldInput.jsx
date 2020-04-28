@@ -34,8 +34,8 @@ const TextFieldInput = ({
         width: '90%',
       },
       '&.MuiFormControl-root': {
-        marginBottom: '-30%',
-        top: '-20%',
+        marginBottom: '-20%',
+        top: '-10%',
       },
     },
   })(TextField);

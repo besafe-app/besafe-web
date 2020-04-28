@@ -27,10 +27,6 @@ export const Body = styled.div`
   background: linear-gradient(123.59deg, #E64C52 0%, #DA1F26 99.55%);
 `;
 
-export const ImgLogo = styled.img`
-  object-fit: contain;
-  width: 150px;
-  height: 150px;
+export const SubmitRow = styled.div`
+  margin-bottom: 40px;
 `;
-
-export const SubmitRow = styled.div``;

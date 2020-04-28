@@ -3,7 +3,7 @@ import TextFieldInput from 'components/core/TextFieldInput';
 import ButtonDefault from 'components/core/ButtonDefault';
 import LogoBeSafe from 'components/core/LogoBeSafe';
 import {
-  Container, Body, SubmitRow, ImgLogo,
+  Container, Body, SubmitRow,
 } from './AuthPresentationStyle';
 
 export default function Auth({ requestAuthAuthentication }) {
@@ -14,7 +14,7 @@ export default function Auth({ requestAuthAuthentication }) {
         <TextFieldInput label="Email" fullWidth />
         <TextFieldInput label="Senha" fullWidth />
         <SubmitRow>
-          <ButtonDefault onClick={requestAuthAuthentication} value="Entrar" size="large" />
+          <ButtonDefault onClick={requestAuthAuthentication} value="Entrar" size="large" width="168px" />
         </SubmitRow>
       </Container>
     </Body>
