@@ -2,6 +2,7 @@ const urls = {
   ROUTES: {
     APP: '/',
     SIGNUP: '/signup',
+    MAP: '/maps',
     HOME: '/home',
     PROFILE: '/profile',
     DOCTORS: '/doctors',
@@ -12,6 +13,7 @@ const urls = {
   LINKS: {
     APP: '/',
     SIGNUP: '/signup',
+    MAP: '/maps',
     HOME: '/home',
     PROFILE: '/profile',
     DOCTORS: '/doctors',
@@ -20,6 +22,5 @@ const urls = {
     ADMINS: '/admins',
   },
 };
-
 
 export default urls;

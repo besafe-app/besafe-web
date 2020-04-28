@@ -12,19 +12,22 @@ import Conditions from 'containers/Conditions';
 import Symptoms from 'containers/Symptoms';
 import Admins from 'containers/Admins';
 import isAuthenticated from './isAuthenticated';
+import Map from '../containers/Map';
 
 export const history = createBrowserHistory();
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => (isAuthenticated() ? (
-      <Component {...props} />
-    ) : (
-      <Redirect
-        to={{ pathname: urls.ROUTES.LOGIN, state: { from: props.location } }}
-      />
-    ))}
+    render={(props) =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{ pathname: urls.ROUTES.LOGIN, state: { from: props.location } }}
+        />
+      )
+    }
   />
 );
 
@@ -33,10 +36,15 @@ const Routes = () => (
     <Switch>
       <Route exact path={urls.ROUTES.APP} component={Auth} />
       <Route exact path={urls.ROUTES.SIGNUP} component={SignUp} />
+      <Route exact path={urls.ROUTES.MAP} component={Map} />
       <PrivateRoute exact path={urls.ROUTES.HOME} component={Home} />
       <PrivateRoute exact path={urls.ROUTES.PROFILE} component={Profile} />
       <PrivateRoute exact path={urls.ROUTES.DOCTORS} component={Doctors} />
-      <PrivateRoute exact path={urls.ROUTES.CONDITIONS} component={Conditions} />
+      <PrivateRoute
+        exact
+        path={urls.ROUTES.CONDITIONS}
+        component={Conditions}
+      />
       <PrivateRoute exact path={urls.ROUTES.SYMPTOMS} component={Symptoms} />
       <PrivateRoute exact path={urls.ROUTES.ADMINS} component={Admins} />
     </Switch>
