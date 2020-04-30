@@ -7,9 +7,7 @@ import FloatList from 'components/core/FloatList';
 const Home = () => (
   <ContainerDefault>
     <Menu />
-    <div style={{ backgroundColor: 'aquamarine' }}>
-      map
-    </div>
+    <div>map</div>
     <FloatList />
   </ContainerDefault>
 );
