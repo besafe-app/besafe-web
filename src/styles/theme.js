@@ -1,6 +1,8 @@
 const theme = {
   colors: {},
-  font: {},
+  font: {
+    default: '"Roboto", sans-serif',
+  },
   validations: {},
 };
 
