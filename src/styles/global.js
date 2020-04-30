@@ -1,11 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  * {    
-    margin: 0;
+  *,
+  *::after,
+  *::before {
     padding: 0;
-    outline: none !important;
-    box-sizing: border-box;
+    margin: 0;
+    box-sizing: inherit;
   }
 
   html, body, #root {
@@ -13,6 +14,7 @@ export default createGlobalStyle`
   }
 
   body{
+    font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased !important;
   }
 
@@ -24,8 +26,8 @@ export default createGlobalStyle`
     z-index: 3;
     width: 17px;
     height: 17px;
-    
   }
+
   a{
     text-decoration: none !important;
     color: inherit !important;
