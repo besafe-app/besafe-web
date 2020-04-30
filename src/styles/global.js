@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import theme from './theme';
+
 export default createGlobalStyle`
   *,
   *::after,
@@ -14,7 +16,7 @@ export default createGlobalStyle`
   }
 
   body{
-    font-family: "Roboto", sans-serif;
+    font-family: ${theme.font.default};
     -webkit-font-smoothing: antialiased !important;
   }
 
