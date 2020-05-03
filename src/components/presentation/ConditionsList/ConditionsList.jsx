@@ -55,7 +55,9 @@ const ConditionsList = ({ conditions }) => {
         {!canBeUpdated ? (
           <>
             <Button
-              style={{ background: 'green', color: 'white' }}
+              style={{
+                background: 'green', color: 'white', marginRight: '20px', width: '85px',
+              }}
               onClick={updateOnclick}
               loading={isUpdated}
             >
@@ -67,7 +69,7 @@ const ConditionsList = ({ conditions }) => {
           </>
         ) : (
           <>
-            <Button type="primary" onClick={updateOkOnclick}>
+            <Button type="primary" onClick={updateOkOnclick} style={{ width: '85px' }}>
               Salvar
             </Button>
             <Button type="danger" onClick={cancelOnClick}>

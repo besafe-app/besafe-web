@@ -22,7 +22,6 @@ const ConditionsListContainer = () => {
       </SpanContent>
       <CondListContainer>
         <List
-        // header={<div>Condições Cadastradas</div>}
           bordered
           dataSource={conditions}
           renderItem={(condition) => (
