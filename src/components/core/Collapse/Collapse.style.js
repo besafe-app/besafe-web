@@ -15,6 +15,7 @@ export const TitleWrapper = styled.div`
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
+    transition: transform 0.5s linear;
   }
 `;
 
@@ -39,6 +40,12 @@ const openContent = css`
     visibility: visible;
     opacity: 1;
     transition: visibility 0s linear 0s, opacity 0.3s linear;
+  }
+
+  ${TitleWrapper} {
+    &::after {
+      transform: translateY(-50%) rotate(-180deg);
+    }
   }
 `;
 
