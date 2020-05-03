@@ -9,7 +9,7 @@ const StatusCard = () => (
     <S.UserIcon>Icon</S.UserIcon>
     <FlexColumn>
       <S.Counter>1039</S.Counter>
-      <S.Label>Usuarios</S.Label>
+      <S.Label>Cidadãos</S.Label>
     </FlexColumn>
   </S.CardWrapper>
 );
