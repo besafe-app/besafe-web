@@ -49,7 +49,7 @@ const profiles = [
 const headCells = [
   {
     id: 'id',
-    label: 'Identificador',
+    label: 'ID',
   },
   {
     id: 'name',
