@@ -9,5 +9,3 @@ export const Teste = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const Item = styled.div``;
