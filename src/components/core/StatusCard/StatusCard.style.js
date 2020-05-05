@@ -26,6 +26,7 @@ export const Counter = styled.strong`
   font-size: 24px;
   font-weight: normal;
   text-align: center;
+  color: #212121;
 `;
 
 export const Label = styled.span`

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, lighten } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import {
   Toolbar,
@@ -13,20 +13,9 @@ const PageHeader = ({ title, textColor }) => {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
     },
-    highlight:
-      theme.palette.type === 'light'
-        ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-        : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-
   }))();
   return (
-    <Toolbar className={classNames(classes.root, classes.highlight)}>
+    <Toolbar className={classNames(classes.root)}>
       <HeaderItem>
         <h5 style={{ color: textColor }}>{title}</h5>
       </HeaderItem>
@@ -39,7 +28,7 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  textColor: '#DA1F26',
+  textColor: 'rgba(0, 0, 0, 0.87)',
   title: '',
 };
 

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { List } from 'antd';
+import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import ConditionsList from 'components/presentation/ConditionsList';
 import { requestCondition } from 'store/ducks/conditionsReducer';
-import { CondListContainer } from './CondListContainerStyle';
+import { CondListContainer, SpanContent } from './CondListContainerStyle';
+
 
 const ConditionsListContainer = () => {
   const dispatch = useDispatch();
@@ -14,16 +16,20 @@ const ConditionsListContainer = () => {
   }, [dispatch]);
 
   return (
-    <CondListContainer>
-      <List
-        header={<div>Condições Cadastradas</div>}
-        bordered
-        dataSource={conditions}
-        renderItem={(condition) => (
-          <ConditionsList key={condition.id} conditions={condition} />
-        )}
-      />
-    </CondListContainer>
+    <>
+      <SpanContent>
+        <span>Lista de condições cadastradas</span>
+      </SpanContent>
+      <CondListContainer>
+        <List
+          bordered
+          dataSource={conditions}
+          renderItem={(condition) => (
+            <ConditionsList key={condition.id} conditions={condition} />
+          )}
+        />
+      </CondListContainer>
+    </>
   );
 };
 

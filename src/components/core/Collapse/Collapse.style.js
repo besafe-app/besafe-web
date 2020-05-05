@@ -23,6 +23,8 @@ export const Title = styled.h3`
   color: rgba(0, 0, 0, 0.5);
   font-size: 20px;
   font-weight: 500;
+  margin-bottom: 0;
+  line-height: normal;
 `;
 
 export const Content = styled.div`

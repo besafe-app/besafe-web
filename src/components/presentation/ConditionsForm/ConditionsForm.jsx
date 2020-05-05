@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addConditionRequest } from 'store/ducks/conditionsReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ContainerForm } from './CondFormStyle';
+import { ContainerForm, SpanContent } from './CondFormStyle';
 
 const ConditionsForm = () => {
   const useStyles = makeStyles({
@@ -35,9 +35,12 @@ const ConditionsForm = () => {
   return (
     <>
       <ContainerForm>
+        <SpanContent>
+          <span>Adicione uma condição preexistente:</span>
+        </SpanContent>
         <form onSubmit={onSubmit}>
           <input
-            placeholder="Adicione uma condição pré-existente"
+            placeholder="Nome da condição preexistente"
             onChange={onChangeInput}
             value={newCondition}
           />
