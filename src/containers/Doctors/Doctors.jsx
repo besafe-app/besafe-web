@@ -5,7 +5,7 @@ import PageHeader from 'components/core/PageHeader';
 const Doctors = () => (
   <>
     <Menu />
-    <PageHeader title="Médicos Cadastrados" />
+    <PageHeader title="Médicos" />
   </>
 );
 

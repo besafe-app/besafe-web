@@ -48,6 +48,10 @@ const profiles = [
 
 const headCells = [
   {
+    id: 'id',
+    label: 'ID',
+  },
+  {
     id: 'name',
     label: 'Nome Completo',
   },
@@ -132,7 +136,7 @@ const Profile = () => {
       <Menu />
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <TableToolbar numSelected={selected.length} title="Cidadãos Cadastrados" />
+          <TableToolbar numSelected={selected.length} title="Cidadãos" />
           <TableContainer>
             <Table
               className={classes.table}
@@ -159,6 +163,7 @@ const Profile = () => {
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} />
                         </TableCell>
+                        <TableCell align="left">{profile.id}</TableCell>
                         <TableCell align="left">{profile.name}</TableCell>
                         <TableCell align="left">{profile.birthday}</TableCell>
                         <TableCell align="left">{profile.gerend}</TableCell>
