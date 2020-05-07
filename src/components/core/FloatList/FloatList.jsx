@@ -1,15 +1,51 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { REQUEST_CONDITION } from 'store/ducks/conditionsReducer';
 import Collapse from 'components/core/Collapse';
+import Checkbox from 'components/core/Checkbox';
 import Radio from 'components/core/Radio';
 import { FlexColumn } from 'components/core/Grid';
 import StatusCard from 'components/core/StatusCard';
-
 import * as S from './FloatListStyle';
+
+const conditionsMock = [
+  {
+    id: 1,
+    name: 'Asma',
+  },
+  {
+    id: 2,
+    name: 'Câncer',
+  },
+  {
+    id: 3,
+    name: 'Diabetes',
+  },
+];
 
 const FloatList = () => {
   const [gender, setGender] = useState('all');
   const [age, setAge] = useState('all');
+  const [pickedConditions, setPickedConditions] = useState([]);
+  const { conditions } = useSelector((state) => state.conditionsReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!conditions?.length) {
+      dispatch({ type: REQUEST_CONDITION });
+    }
+  }, []);
+
+  const handleChange = ({ target: { value, checked } }) => {
+    const conditionIdToAdd = Number(value);
+
+    if (checked) {
+      setPickedConditions([...pickedConditions, conditionIdToAdd]);
+    } else {
+      setPickedConditions(pickedConditions
+        .filter((conditionID) => conditionID !== conditionIdToAdd));
+    }
+  };
 
   return (
     <S.Teste>
@@ -136,14 +172,16 @@ const FloatList = () => {
       </Collapse>
       <Collapse title="Condições Preexistentes">
         <FlexColumn>
-          <Radio
-            label="Todos"
-            id="all"
-            name="gender"
-            value="all"
-            handleChange={() => setGender('all')}
-            checked={gender === 'all'}
-          />
+          {conditionsMock.map(({ id, name }) => (
+            <Checkbox
+              key={id}
+              label={name}
+              id={`condition_${id}`}
+              name={`condition_${id}`}
+              value={id}
+              handleChange={handleChange}
+            />
+          ))}
         </FlexColumn>
       </Collapse>
     </S.Teste>
