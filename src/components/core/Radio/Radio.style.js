@@ -28,7 +28,7 @@ export const Radio = styled.span`
   height: 15px;
   width: 15px;
   position: relative;
-  transition: background-color 0.3s linear;
+  transition: background-color 0.2s linear;
 
   &:not(:last-child) {
     margin-right: 10px;
@@ -36,18 +36,15 @@ export const Radio = styled.span`
 
   &::after {
     content: url(${iconCheck});
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 95%;
     width: 95%;
     opacity: 0;
     transition: opacity 0.2s;
 
     position: absolute;
-    top: 65%;
+    top: 50%;
     left: 50%;
-    transform: translate(-15px, -50%);
+    transform: translate(-50%, -50%);
   }
 `;
 
