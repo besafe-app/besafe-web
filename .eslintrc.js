@@ -41,12 +41,6 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['.storybook/**', 'src/**/**/stories.js'],
-      },
-    ],
     'react/jsx-one-expression-per-line': 'off',
   },
   settings: {
