@@ -3,12 +3,12 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  parser: 'babel-eslint',
   extends: ['plugin:react/recommended', 'airbnb'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -16,15 +16,40 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react'],
-  rules: {},
+  plugins: ['react', 'prettier'],
+  rules: {
+    'comma-dangle': 'off',
+    quotes: [2, 'double', 'avoid-escape'],
+    'linebreak-style': 0,
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        components: [],
+        required: {
+          some: ['nesting', 'id'],
+        },
+        allowChildren: true,
+      },
+    ],
+    'react/forbid-prop-types': 0,
+    'react/no-array-index-key': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
+    'import/prefer-default-export': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+  },
   settings: {
     react: {
       version: 'detect',
     },
     'import/resolver': {
       node: {
-        paths: ['src'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
   },
