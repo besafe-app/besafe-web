@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import {
   deleteConditionRequest,
   upadteConditionRequest,
-} from 'store/ducks/conditionsReducer';
+} from 'store/ducks/conditions';
 
 const ConditionsList = ({ conditions }) => {
   const dispatch = useDispatch();

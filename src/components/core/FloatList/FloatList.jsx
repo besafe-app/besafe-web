@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { REQUEST_CONDITION } from 'store/ducks/conditionsReducer';
+import { REQUEST_CONDITION } from 'store/ducks/conditions';
 import Collapse from 'components/core/Collapse';
 import Checkbox from 'components/core/Checkbox';
 import Radio from 'components/core/Radio';
@@ -27,7 +27,7 @@ const FloatList = () => {
   const [gender, setGender] = useState('all');
   const [age, setAge] = useState('all');
   const [pickedConditions, setPickedConditions] = useState([]);
-  const { conditions } = useSelector((state) => state.conditionsReducer);
+  const { conditions } = useSelector((state) => state.conditions);
   const dispatch = useDispatch();
 
   useEffect(() => {

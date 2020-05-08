@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Creators as AuthActions } from 'store/ducks/authReducer';
+import { Creators as AuthActions } from 'store/ducks/auth';
 import {
   Divider, Drawer, List, ListItem,
 } from '@material-ui/core';

@@ -13,7 +13,7 @@ import {
   deleteConditionFailure,
   successCondition,
   failureCondition,
-} from 'store/ducks/conditionsReducer';
+} from 'store/ducks/conditions';
 import { POST, DELETE, GET } from 'utils/constants/verbs';
 import { requestAPI } from 'helpers/requestHelpers';
 import {

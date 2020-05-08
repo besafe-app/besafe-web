@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { takeLatest, put } from 'redux-saga/effects';
-import { Types } from 'store/ducks/authReducer';
+import { Types } from 'store/ducks/auth';
 import { history } from 'utils/routes';
 import urls from 'utils/constants/urls';
 
@@ -22,7 +22,6 @@ function* logoutUser() {
     yield put({ type: Types.AUTH_LOG_OUT_FAIL, errors });
   }
 }
-
 
 export function* watcherSaga() {
   yield takeLatest(Types.AUTH_REQUEST, requestAuth);

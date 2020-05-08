@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addConditionRequest } from 'store/ducks/conditionsReducer';
+import { addConditionRequest } from 'store/ducks/conditions';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { ContainerForm, SpanContent } from './CondFormStyle';
@@ -21,7 +21,7 @@ const ConditionsForm = () => {
   const [newCondition, setNewCondition] = useState('');
   const dispatch = useDispatch();
 
-  const { isAddingCondition } = useSelector((state) => state.conditionsReducer);
+  const { isAddingCondition } = useSelector((state) => state.conditions);
 
   const onChangeInput = useCallback((e) => {
     setNewCondition(e.target.value);

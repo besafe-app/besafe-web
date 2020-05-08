@@ -3,13 +3,13 @@ import { List } from 'antd';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import ConditionsList from 'components/presentation/ConditionsList';
-import { requestCondition } from 'store/ducks/conditionsReducer';
+import { requestCondition } from 'store/ducks/conditions';
 import { CondListContainer, SpanContent } from './CondListContainerStyle';
 
 
 const ConditionsListContainer = () => {
   const dispatch = useDispatch();
-  const { conditions } = useSelector((state) => state.conditionsReducer);
+  const { conditions } = useSelector((state) => state.conditions);
 
   useEffect(() => {
     dispatch(requestCondition());
