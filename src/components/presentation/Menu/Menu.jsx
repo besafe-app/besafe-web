@@ -25,11 +25,8 @@ const Menu = () => {
       display: 'flex',
       width: '100%',
       '& .MuiListItem-gutters': {
-        fontSize: 14,
         paddingLeft: 0,
         paddingRight: 0,
-        fontWeight: 500,
-        lineHeight: '30px',
         '&:hover': {
           backgroundColor: 'transparent',
           color: 'transparent',
@@ -37,7 +34,6 @@ const Menu = () => {
       },
       '& .MuiDrawer-docked': {
         width: '100%',
-        backgroundColor: 'red',
       },
       '& .MuiDrawer-paper': {
         width: '260px',
