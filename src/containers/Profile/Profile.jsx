@@ -16,7 +16,7 @@ import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
 
 const profiles = [
-  {
+  /* {
     id: 1,
     name: 'Paloma',
     birthday: '19931016',
@@ -43,7 +43,7 @@ const profiles = [
     birthday: '19931016',
     gerend: 'male',
     conditions: ['Tosse seca', 'febre'],
-  },
+  }, */
 ];
 
 const headCells = [
