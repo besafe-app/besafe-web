@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
 export const Teste = styled.div`
@@ -9,5 +10,3 @@ export const Teste = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const Item = styled.div``;

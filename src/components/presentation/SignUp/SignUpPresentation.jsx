@@ -1,7 +1,7 @@
 import React from 'react';
 import TextFieldInput from 'components/core/TextFieldInput';
 import ButtonDefault from 'components/core/ButtonDefault';
-import BeSafeImg from 'assets/img/besafe-logo.png';
+import BeSafeImg from 'assets/img/logo.png';
 import {
   Container, Body, SubmitRow, ImgLogo,
 } from './SignUpPresentationStyle';

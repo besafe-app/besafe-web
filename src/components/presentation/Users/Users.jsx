@@ -135,8 +135,6 @@ const Users = () => {
           <ButtonContainer>
             <Link to={urls.ROUTES.SIGNUP}>
               <ButtonDefault
-                variant="contained"
-                backgrounColor="#DA1F26"
                 value="Novo Usuário"
                 size="small"
               />

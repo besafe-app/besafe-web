@@ -15,6 +15,7 @@ export const TitleWrapper = styled.div`
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
+    transition: transform 0.5s linear;
   }
 `;
 
@@ -22,6 +23,8 @@ export const Title = styled.h3`
   color: rgba(0, 0, 0, 0.5);
   font-size: 20px;
   font-weight: 500;
+  margin-bottom: 0;
+  line-height: normal;
 `;
 
 export const Content = styled.div`
@@ -39,6 +42,12 @@ const openContent = css`
     visibility: visible;
     opacity: 1;
     transition: visibility 0s linear 0s, opacity 0.3s linear;
+  }
+
+  ${TitleWrapper} {
+    &::after {
+      transform: translateY(-50%) rotate(-180deg);
+    }
   }
 `;
 

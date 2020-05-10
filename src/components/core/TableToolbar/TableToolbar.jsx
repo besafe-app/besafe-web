@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { makeStyles, lighten } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Toolbar, Typography, Tooltip, IconButton,
 } from '@material-ui/core';
@@ -13,25 +13,15 @@ const TableToolbar = ({ numSelected, title }) => {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
     },
-    highlight:
-      theme.palette.type === 'light'
-        ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-        : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
     title: {
       fontWeight: 'bold',
       flex: '1 1 100%',
-      color: '#CC3632',
+      color: 'rgba(0, 0, 0, 0.87)',
     },
   }))();
 
   return (
-    <Toolbar className={classNames(classes.root, classes.highlight)}>
+    <Toolbar className={classNames(classes.root)}>
       <Typography
         className={classes.title}
         variant="h5"
