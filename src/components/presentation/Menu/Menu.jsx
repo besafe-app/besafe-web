@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators as AuthActions } from 'store/ducks/authReducer';
+import urls from 'utils/constants/urls';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-  Divider, Drawer, List, ListItem,
+  Divider, Drawer, MenuList, MenuItem,
 } from '@material-ui/core';
 import ListTitle from 'components/core/ListTitle';
 import LogoutLink from 'components/presentation/LogoutLink';
-import { makeStyles } from '@material-ui/core/styles';
-import urls from 'utils/constants/urls';
-import LinkCustom from 'components/core/LinkCustom';
 import ImgIcon from 'assets/img/logo.png';
 import {
   TitleContainer,
   LogoIcon,
   UserNameContainer,
-  Container,
+  Container, StyledLink,
 } from './MenuStyle';
+
 
 const Menu = () => {
   const [userName, setUsername] = useState({ userName: '' });
@@ -26,12 +26,13 @@ const Menu = () => {
       width: '100%',
       '& .MuiListItem-gutters': {
         fontSize: 14,
-        paddingLeft: 28,
+        paddingLeft: 0,
+        paddingRight: 0,
         fontWeight: 500,
         lineHeight: '30px',
         '&:hover': {
-          backgroundColor: 'rgba(204, 54, 50, 0.1)',
-          color: '#CC3632',
+          backgroundColor: 'transparent',
+          color: 'transparent',
         },
       },
       '& .MuiDrawer-docked': {
@@ -55,27 +56,6 @@ const Menu = () => {
     }
   }, []);
 
-  const menuItems = [
-    {
-      title: '',
-      items: [
-        { label: 'Inicial', link: urls.LINKS.HOME },
-        { label: 'Cidadãos', link: urls.LINKS.PROFILE },
-        { label: 'Médicos', link: urls.LINKS.DOCTORS },
-      ],
-    },
-    {
-      title: 'Saúde',
-      items: [
-        { label: 'Condições Preexistentes', link: urls.LINKS.CONDITIONS },
-        { label: 'Sintomas', link: urls.LINKS.SYMPTOMS },
-      ],
-    },
-    {
-      title: 'Usuários',
-      items: [{ label: 'Administradores', link: urls.LINKS.ADMINS }],
-    },
-  ];
 
   return (
     <nav className={materialStyles.root}>
@@ -88,21 +68,50 @@ const Menu = () => {
           <LogoutLink logoutUser={logoutUser} />
         </Container>
         <Divider />
-        {menuItems.map(({ title, items }) => (
-          <List key={title}>
-            {title.length > 0 && (
-              <TitleContainer>
-                <ListTitle title={title} />
-              </TitleContainer>
-            )}
-            {items.map(({ label, link }) => (
-              <ListItem key={label} value={label} variant="menu">
-                <LinkCustom route={link}>{label}</LinkCustom>
-              </ListItem>
-            ))}
-            <Divider />
-          </List>
-        ))}
+        <MenuList>
+          <MenuItem>
+            <StyledLink exact to={urls.ROUTES.HOME}>
+              Inicial
+            </StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to={urls.ROUTES.PROFILE}>
+              Cidadãos
+            </StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to={urls.ROUTES.DOCTORS}>
+              Médicos
+            </StyledLink>
+          </MenuItem>
+        </MenuList>
+        <Divider />
+        <MenuList>
+          <TitleContainer>
+            <ListTitle title="Saúde" />
+          </TitleContainer>
+          <MenuItem>
+            <StyledLink exact to={urls.ROUTES.CONDITIONS}>
+              Condições Preexistentes
+            </StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to={urls.ROUTES.SYMPTOMS}>
+              Sintomas
+            </StyledLink>
+          </MenuItem>
+        </MenuList>
+        <Divider />
+        <MenuList>
+          <TitleContainer>
+            <ListTitle title="Usuários" />
+          </TitleContainer>
+          <MenuItem>
+            <StyledLink exact to={urls.ROUTES.ADMINS}>
+              Administradores
+            </StyledLink>
+          </MenuItem>
+        </MenuList>
       </Drawer>
     </nav>
   );
