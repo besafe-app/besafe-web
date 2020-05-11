@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { requestProfile } from 'store/ducks/profile';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
@@ -15,36 +17,36 @@ import Menu from 'components/presentation/Menu';
 import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
 
-const profiles = [
-  /* {
+/* const users = [
+  {
     id: 1,
     name: 'Paloma',
-    birthday: '19931016',
-    gerend: 'femele',
+    birthDate: '19931016',
+    gender: 'femele',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 2,
     name: 'Daniel',
-    birthday: '19931016',
-    gerend: 'male',
+    birthDate: '19931016',
+    gender: 'male',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 3,
     name: 'Ermelinda',
-    birthday: '19931016',
-    gerend: 'femele',
+    birthDate: '19931016',
+    gender: 'femele',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 4,
     name: 'John',
-    birthday: '19931016',
-    gerend: 'male',
+    birthDate: '19931016',
+    gender: 'male',
     conditions: ['Tosse seca', 'febre'],
-  }, */
-];
+  },
+]; */
 
 const headCells = [
   {
@@ -56,11 +58,11 @@ const headCells = [
     label: 'Nome Completo',
   },
   {
-    id: 'birthday',
+    id: 'birthDate',
     label: 'Data de Nascimento',
   },
   {
-    id: 'gerend',
+    id: 'gender',
     label: 'Gênero',
   },
   {
@@ -97,11 +99,17 @@ const Profile = () => {
       cursor: 'pointer',
     },
   })();
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.profile);
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const isSelected = (id) => selected.indexOf(id) !== -1;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, profiles.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+
+  useEffect(() => {
+    dispatch(requestProfile());
+  }, [dispatch]);
 
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
@@ -145,30 +153,30 @@ const Profile = () => {
             >
               <TableHeader headCells={headCells} />
               <TableBody>
-                {profiles
+                {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((profile) => {
-                    const isItemSelected = isSelected(profile.id);
+                  .map((user) => {
+                    const isItemSelected = isSelected(user.id);
                     return (
                       <TableRow
                         classes={styleRow}
                         hover
-                        onClick={(event) => handleClick(event, profile.id)}
+                        onClick={(event) => handleClick(event, user.id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={profile.id}
+                        key={user.id}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} />
                         </TableCell>
-                        <TableCell align="left">{profile.id}</TableCell>
-                        <TableCell align="left">{profile.name}</TableCell>
-                        <TableCell align="left">{profile.birthday}</TableCell>
-                        <TableCell align="left">{profile.gerend}</TableCell>
+                        <TableCell align="left">{user.id}</TableCell>
+                        <TableCell align="left">{user.name}</TableCell>
+                        <TableCell align="left">{user.birthDate}</TableCell>
+                        <TableCell align="left">{user.gender}</TableCell>
                         <TableCell align="left">
-                          {profile.conditions.map((condition) => (`${condition}, `))}
+                          {user.conditions.map((condition) => (`${condition}, `))}
                         </TableCell>
                       </TableRow>
                     );
@@ -184,7 +192,7 @@ const Profile = () => {
           <TablePagination
             rowsPerPageOptions={[10]}
             component="div"
-            count={profiles.length}
+            count={users.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
