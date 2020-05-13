@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-const TableToolbar = ({ numSelected, title }) => {
+const TableToolbar = ({ count, title }) => {
   const classes = makeStyles((theme) => ({
     root: {
       paddingLeft: theme.spacing(2),
@@ -30,16 +30,16 @@ const TableToolbar = ({ numSelected, title }) => {
       >
         {title}
       </Typography>
-      {numSelected > 0 && (
+      {count >= 0 && (
         <Typography
           className={classes.title}
           color="inherit"
           variant="subtitle1"
           component="div"
         >
-          Registros selecionados :
+          Total de cidadãos:
           {' '}
-          {numSelected}
+          {count}
         </Typography>
       )}
       <Tooltip title="Filter list">

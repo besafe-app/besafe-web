@@ -8,40 +8,39 @@ import {
   TableCell,
   TablePagination,
   TableRow,
-  Checkbox,
 } from '@material-ui/core';
 import ContainerDefault from 'components/core/ContainerDefault';
 import Menu from 'components/presentation/Menu';
 import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
 
-const profiles = [
+const users = [
   {
     id: 1,
     name: 'Paloma',
-    birthday: '19931016',
-    gerend: 'femele',
+    birthDate: '19931016',
+    gender: 'femele',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 2,
     name: 'Daniel',
-    birthday: '19931016',
-    gerend: 'male',
+    birthDate: '19931016',
+    gender: 'male',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 3,
     name: 'Ermelinda',
-    birthday: '19931016',
-    gerend: 'femele',
+    birthDate: '19931016',
+    gender: 'femele',
     conditions: ['Tosse seca', 'febre'],
   },
   {
     id: 4,
     name: 'John',
-    birthday: '19931016',
-    gerend: 'male',
+    birthDate: '19931016',
+    gender: 'male',
     conditions: ['Tosse seca', 'febre'],
   },
 ];
@@ -56,11 +55,11 @@ const headCells = [
     label: 'Nome Completo',
   },
   {
-    id: 'birthday',
+    id: 'birthDate',
     label: 'Data de Nascimento',
   },
   {
-    id: 'gerend',
+    id: 'gender',
     label: 'Gênero',
   },
   {
@@ -97,30 +96,10 @@ const Profile = () => {
       cursor: 'pointer',
     },
   })();
-  const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const isSelected = (id) => selected.indexOf(id) !== -1;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, profiles.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
 
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -136,7 +115,7 @@ const Profile = () => {
       <Menu />
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <TableToolbar numSelected={selected.length} title="Cidadãos" />
+          <TableToolbar count={users.length} title="Cidadãos" />
           <TableContainer>
             <Table
               className={classes.table}
@@ -144,31 +123,24 @@ const Profile = () => {
               aria-label="Cidadãos Cadastrados"
             >
               <TableHeader headCells={headCells} />
-              <TableBody>
-                {profiles
+              <TableBody >
+                {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((profile) => {
-                    const isItemSelected = isSelected(profile.id);
+                  .map((users) => {
                     return (
                       <TableRow
                         classes={styleRow}
                         hover
-                        onClick={(event) => handleClick(event, profile.id)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={profile.id}
-                        selected={isItemSelected}
+                        key={users.id}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} />
+                        <TableCell>
                         </TableCell>
-                        <TableCell align="left">{profile.id}</TableCell>
-                        <TableCell align="left">{profile.name}</TableCell>
-                        <TableCell align="left">{profile.birthday}</TableCell>
-                        <TableCell align="left">{profile.gerend}</TableCell>
+                        <TableCell align="left">{users.id}</TableCell>
+                        <TableCell align="left">{users.name}</TableCell>
+                        <TableCell align="left">{users.birthDate}</TableCell>
+                        <TableCell align="left">{users.gender}</TableCell>
                         <TableCell align="left">
-                          {profile.conditions.map((condition) => (`${condition}, `))}
+                          {users.conditions.map((condition) => (`${condition}, `))}
                         </TableCell>
                       </TableRow>
                     );
@@ -184,7 +156,7 @@ const Profile = () => {
           <TablePagination
             rowsPerPageOptions={[10]}
             component="div"
-            count={profiles.length}
+            count={users.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
