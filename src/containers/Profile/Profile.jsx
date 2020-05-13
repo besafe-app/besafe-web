@@ -16,37 +16,6 @@ import Menu from 'components/presentation/Menu';
 import TableToolbar from 'components/core/TableToolbar';
 import TableHeader from 'components/core/TableHeader';
 
-/*  const users = [
-  {
-    id: 1,
-    name: 'Paloma',
-    birthDate: '19931016',
-    gender: 'femele',
-    conditions: ['Tosse seca', 'febre'],
-  },
-  {
-    id: 2,
-    name: 'Daniel',
-    birthDate: '19931016',
-    gender: 'male',
-    conditions: ['Tosse seca', 'febre'],
-  },
-  {
-    id: 3,
-    name: 'Ermelinda',
-    birthDate: '19931016',
-    gender: 'femele',
-    conditions: ['Tosse seca', 'febre'],
-  },
-  {
-    id: 4,
-    name: 'John',
-    birthDate: '19931016',
-    gender: 'male',
-    conditions: ['Tosse seca', 'febre'],
-  },
-]; */
-
 const headCells = [
   {
     id: 'id',
