@@ -1,88 +1,211 @@
 import React from 'react';
-import { GoogleMap, Marker } from "react-google-maps"
-
 
 import Menu from 'components/presentation/Menu';
 import ContainerDefault from 'components/core/ContainerDefault';
 import FloatList from 'components/core/FloatList';
 
-const Home = () => (
-  <ContainerDefault>
-    const fetch = require("isomorphic-fetch");
-const { compose, withProps, withHandlers } = require("recompose");
-const {
-  withScriptjs,
-  withGoogleMap,
+import {
   GoogleMap,
-  Marker,
-} = require("react-google-maps");
-const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
-
-const MapWithAMarkerClusterer = compose(
-  withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA1G6tjgGwDdsC96GcCBies7ecBYs7BImg=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  withHandlers({
-    onMarkerClustererClick: () => (markerClusterer) => {
-      const clickedMarkers = markerClusterer.getMarkers()
-      console.log(`Current clicked markers length: ${clickedMarkers.length}`)
-      console.log(clickedMarkers)
-    },
-  }),
+  withGoogleMap,
   withScriptjs,
-  withGoogleMap
-)(props =>
-  <GoogleMap
-    defaultZoom={3}
-    defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
-  >
-    <MarkerClusterer
-      onClick={props.onMarkerClustererClick}
-      averageCenter
-      enableRetinaIcons
-      gridSize={60}
+  Marker,
+} from 'react-google-maps';
+
+// Estilização do mapa
+const exampleMapStyles = [
+  {
+      "featureType": "administrative",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "lightness": 33
+          }
+      ]
+  },
+  {
+      "featureType": "landscape",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#fffaf4"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.attraction",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.business",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.government",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.medical",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#c5dac6"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.park",
+      "elementType": "labels",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "lightness": 20
+          }
+      ]
+  },
+  {
+      "featureType": "poi.place_of_worship",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.school",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.sports_complex",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+          {
+              "lightness": 20
+          }
+      ]
+  },
+  {
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#dad5d5"
+          }
+      ]
+  },
+  {
+      "featureType": "road.arterial",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#eae2d8"
+          }
+      ]
+  },
+  {
+      "featureType": "road.local",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#fffbee"
+          }
+      ]
+  },
+  {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "color": "#acbcc9"
+          }
+      ]
+  }
+]
+
+const MyMapComponent = withScriptjs(
+  withGoogleMap((props) => (
+    <GoogleMap
+      defaultZoom={7}
+      defaultCenter={{ lat: -19.9588381, lng: -43.6974768 }}
+      options={{ styles: exampleMapStyles, disableDefaultUI: true }}
     >
-      {props.markers.map(marker => (
-        <Marker
-          key={marker.photo_id}
-          position={{ lat: marker.latitude, lng: marker.longitude }}
-        />
-      ))}
-    </MarkerClusterer>
-  </GoogleMap>
+      {props.isMarkerShown && (
+        <Marker position={{ lat: -19.9588381, lng: -43.6974768 }} />
+      )}
+      <Marker position={{ lat: -19.9588381, lng: -43.6974768 }} />
+    </GoogleMap>
+  ))
 );
 
-class DemoApp extends React.PureComponent {
-  componentWillMount() {
-    this.setState({ markers: [] })
-  }
-
-  componentDidMount() {
-    const url = [
-      // Length issue
-      `https://gist.githubusercontent.com`,
-      `/farrrr/dfda7dd7fccfec5474d3`,
-      `/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json`
-    ].join("")
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ markers: data.photos });
-      });
-  }
-
-  render() {
-    return (
-      <MapWithAMarkerClusterer markers={this.state.markers} />
-    )
-  }
-}
-
-<DemoApp />
+const Home = () => (
+  <ContainerDefault>
+    <Menu />
+    <div>
+      <MyMapComponent
+        googleMapURL={
+          'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA1G6tjgGwDdsC96GcCBies7ecBYs7BImg'
+        }
+        loadingElement={<div style={{ height: '100%' }} />}
+        containerElement={<div style={{ height: '100%' }} />}
+        mapElement={<div style={{ height: '100%' }} />}
+      />
+    </div>
+    <FloatList />
   </ContainerDefault>
 );
 
