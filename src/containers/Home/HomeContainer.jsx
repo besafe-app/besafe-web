@@ -3,6 +3,7 @@ import React from 'react';
 import Menu from 'components/presentation/Menu';
 import ContainerDefault from 'components/core/ContainerDefault';
 import FloatList from 'components/core/FloatList';
+import MapPresentation from '../../components/presentation/Map/MapPresentation';
 
 import {
   GoogleMap,
@@ -196,14 +197,7 @@ const Home = () => (
   <ContainerDefault>
     <Menu />
     <div>
-      <MyMapComponent
-        googleMapURL={
-          'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA1G6tjgGwDdsC96GcCBies7ecBYs7BImg'
-        }
-        loadingElement={<div style={{ height: '100%' }} />}
-        containerElement={<div style={{ height: '100%' }} />}
-        mapElement={<div style={{ height: '100%' }} />}
-      />
+    <MapPresentation/>
     </div>
     <FloatList />
   </ContainerDefault>

@@ -1,3 +1,3 @@
-import Map from './Map';
+import MapPresentation from './MapPresentation';
 
-export default Map;
+export default MapPresentation;
